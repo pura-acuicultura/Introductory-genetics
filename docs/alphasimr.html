@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Introductory genetics through tilapia breeding simulations</title>
-  <meta name="description" content="Introductory genetics through tilapia breeding simulations" />
+  <title>Chapter 2 AlphaSimR | Introductory genetics through tilapia breeding simulations</title>
+  <meta name="description" content="Chapter 2 AlphaSimR | Introductory genetics through tilapia breeding simulations" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Introductory genetics through tilapia breeding simulations" />
+  <meta property="og:title" content="Chapter 2 AlphaSimR | Introductory genetics through tilapia breeding simulations" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Introductory genetics through tilapia breeding simulations" />
+  <meta name="twitter:title" content="Chapter 2 AlphaSimR | Introductory genetics through tilapia breeding simulations" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="alphasimr.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="recombination.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +51,6 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -191,31 +189,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Introductory genetics through tilapia breeding simulations</h1>
-<p class="author"><em>PURA acuicultura</em></p>
-<p class="date"><em>2021-01-04</em></p>
+<div id="alphasimr" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> AlphaSimR</h1>
+<div id="introduction-1" class="section level2">
+<h2><span class="header-section-number">2.1</span> Introduction</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="alphasimr.html#cb1-1"></a><span class="kw">library</span>(AlphaSimR)</span>
+<span id="cb1-2"><a href="alphasimr.html#cb1-2"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 </div>
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p>AlphaSimR is a powerful platform for carrying out breeding simulations. Rather than working in phenotypic measures, simulations in AlphaSimR are carried out at the level of genome. Any level of genomic architecture can be simulated. Chromosome number and length, segregation site and loci number, ploidy level, etc. are all programmable. In fact, the simulator is much more limited by our understanding of fish genomes than by its capabilities. In this chapter we will learn about AlphaSimR by doing. In understanding how AlphaSimR works it will be impossible to avoid a number of fundamental themes relating to genetics, including quantitative, population, and molecular. We will provide some necessary background, but no where near what is available in standard texts on the subjects. As such, look for recommended references for a deeper understanding. Specific goals of the chapter include:</p>
-<ol style="list-style-type: decimal">
-<li>Take a closer look at AlphaSimR and how it is used for breeding simulation</li>
-<li>Follow a small population through one generation to understand recombination</li>
-<li>Examine important measures of population genetics across multiple generations</li>
-<li>Develop an additive trait and examine the quantitative trait loci underlying the trait</li>
-<li>Learn how to create simple physical maps of the genome</li>
-<li>Develop ‘tilapia-like’ genomes and populations for breeding simulations</li>
-</ol>
+<div id="creating-founder-haplotypes" class="section level2">
+<h2><span class="header-section-number">2.2</span> Creating founder haplotypes</h2>
+<p>The first step in developing a population for simulation is the definition of founder haplotypes. In creating founder haplotypes, the genomic architecture of the to be simulated organism is defined. In AlphaSimR, haplotypes are binary strings of 0’s and 1’s. Strings are arranged in a pre-defined number of chromosomes and to a pre-defined length in units of segregation sites. Given that the custom design of haplotypes can be a bit overwhelming to first time users, the function <strong>quickHaplo</strong> can initially be used to get started. <strong>quickHaplo</strong> allows the user to easily define the number of individuals, number of chromosomes per individual, number of segregation sites per chromosome, ploidy level, and the genetic length of chromosomes in units of Morgans. An option for creating inbred founders is also possible.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="alphasimr.html#cb2-1"></a>pop_haplos &lt;-<span class="st"> </span><span class="kw">quickHaplo</span>(<span class="dt">nInd =</span> <span class="dv">10</span>,      <span class="co"># number of individuals</span></span>
+<span id="cb2-2"><a href="alphasimr.html#cb2-2"></a>                         <span class="dt">nChr =</span> <span class="dv">1</span>,       <span class="co"># number of chromosomes</span></span>
+<span id="cb2-3"><a href="alphasimr.html#cb2-3"></a>                         <span class="dt">segSites =</span> <span class="dv">10</span>,  <span class="co"># number of segregation sites</span></span>
+<span id="cb2-4"><a href="alphasimr.html#cb2-4"></a>                         <span class="dt">genLen =</span> <span class="dv">1</span>,     <span class="co"># genetic length in Morgans</span></span>
+<span id="cb2-5"><a href="alphasimr.html#cb2-5"></a>                         <span class="dt">ploidy =</span> 2L,    <span class="co"># ploidy level of organism</span></span>
+<span id="cb2-6"><a href="alphasimr.html#cb2-6"></a>                         <span class="dt">inbred =</span> <span class="ot">FALSE</span>) <span class="co"># are founders inbred?</span></span></code></pre></div>
+<p><strong>quickHaplo</strong> saves haplotype information as a <strong>MapPop</strong> class object. Each slot can be accessed using @ symbol, with list slots requiring additional designations in <strong>[]</strong>. The <strong>MapPop</strong> file provides a record of important genome characteristics. Knowing how to access these characteristics is important to secondary analyses of breeding simulations.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="alphasimr.html#cb3-1"></a>pop_haplos<span class="op">@</span>genMap[<span class="dv">1</span>] <span class="co"># a vector of segregation sites locations (M) per [chromosome]</span></span>
+<span id="cb3-2"><a href="alphasimr.html#cb3-2"></a>pop_haplos<span class="op">@</span>centromere[<span class="dv">1</span>] <span class="co"># a vector of centromere location (M) per [chromosome]</span></span>
+<span id="cb3-3"><a href="alphasimr.html#cb3-3"></a>pop_haplos<span class="op">@</span>nInd <span class="co"># the number of individuals</span></span>
+<span id="cb3-4"><a href="alphasimr.html#cb3-4"></a>pop_haplos<span class="op">@</span>nChr <span class="co"># the number of chromosomes</span></span>
+<span id="cb3-5"><a href="alphasimr.html#cb3-5"></a>pop_haplos<span class="op">@</span>ploidy <span class="co"># the ploidy of individuals</span></span>
+<span id="cb3-6"><a href="alphasimr.html#cb3-6"></a>pop_haplos<span class="op">@</span>nLoci[<span class="dv">1</span>] <span class="co"># a vector of loci number per [chromosome]</span></span>
+<span id="cb3-7"><a href="alphasimr.html#cb3-7"></a>pop_haplos<span class="op">@</span>geno[<span class="dv">1</span>] <span class="co"># matrices of haplotypes per [individual]</span></span></code></pre></div>
+<p>Definition of haplotypes is covered in greater detail throughout chapter 1. Chromosome number, segregation sites, haplotypes maps, and centromeres are central to physical genome mapping. Genetic length is covered in a thorough investigation of recombination in AlphaSimR.</p>
+</div>
+<div id="setting-simulation-parameters" class="section level2">
+<h2><span class="header-section-number">2.3</span> Setting simulation parameters</h2>
+<p>After defining the founder population haplotypes, simulation parameters are set. As their name implies, simulation parameters define the conditions through which a simulation operates. AlphaSimR possesses a myriad of simulation parameters – far more than can be covered here. A review of the most important parameters to the breeding simulations covered throughout the book are illustrated here. The first step in defining simulation parameters is to create a <strong>SimParam</strong> object. After this is done, simulation parameters can be added sequentially.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="alphasimr.html#cb4-1"></a>SP =<span class="st"> </span>SimParam<span class="op">$</span><span class="kw">new</span>(pop_haplos) <span class="co"># create a variable for storing new simulation parameters</span></span></code></pre></div>
+</div>
+<div id="adding-traits-to-a-breeding-simulation" class="section level2">
+<h2><span class="header-section-number">2.4</span> Adding traits to a breeding simulation</h2>
+<p>When paired in diploid individuals, the binary haplotypes become genotypes. At a given locus an individual can be 00, 01, or 11. While it is possible to simply simulate and evaluate genotypic changes in AlphaSimR, most breeding simulations aim to also explore phenotypic change. The first step in simulating phenotypic change is define linkages between the genotypes of specific loci and traits of interest for simulation. Traits of any complexity can be added.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="alphasimr.html#cb5-1"></a>SP<span class="op">$</span><span class="kw">addTraitA</span>(<span class="dt">nQtlPerChr =</span> <span class="dv">3</span>, <span class="co"># number of QTL for trait</span></span>
+<span id="cb5-2"><a href="alphasimr.html#cb5-2"></a>             <span class="dt">mean =</span> <span class="dv">454</span>, <span class="co"># mean genetic value of the trait</span></span>
+<span id="cb5-3"><a href="alphasimr.html#cb5-3"></a>             <span class="dt">var =</span> <span class="dv">50</span>, <span class="co"># variance of trait in population</span></span>
+<span id="cb5-4"><a href="alphasimr.html#cb5-4"></a>             <span class="dt">corA =</span> <span class="ot">NULL</span>, <span class="co"># matrix of correlations between additive effects</span></span>
+<span id="cb5-5"><a href="alphasimr.html#cb5-5"></a>             <span class="dt">gamma =</span> <span class="ot">FALSE</span>, <span class="co"># to use a gamma distribution in place of a normal distribution</span></span>
+<span id="cb5-6"><a href="alphasimr.html#cb5-6"></a>             <span class="dt">shape =</span> <span class="dv">1</span>, <span class="co"># shape parameter for gamma distribution only</span></span>
+<span id="cb5-7"><a href="alphasimr.html#cb5-7"></a>             <span class="dt">force =</span> <span class="ot">FALSE</span>) <span class="co"># keep false until this is understood!</span></span></code></pre></div>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="alphasimr.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="recombination.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -246,7 +270,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/pura-acuicultura/Introductory-genetics/edit/master/index.Rmd",
+"link": "https://github.com/pura-acuicultura/Introductory-genetics/edit/master/02-alphaSimR.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -254,7 +278,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/pura-acuicultura/Introductory-genetics/blob/master/index.Rmd",
+"link": "https://github.com/pura-acuicultura/Introductory-genetics/blob/master/02-alphaSimR.Rmd",
 "text": null
 },
 "download": null,

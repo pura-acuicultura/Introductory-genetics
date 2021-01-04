@@ -1,0 +1,18 @@
+---
+title: "Tilapia-like genome"
+author: "PURA acuicultura"
+date: "1/4/2021"
+output: html_document
+---
+
+# Simulating a tilapia like genome
+
+```{r gen_setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+```{r gen_libraries}
+
+```

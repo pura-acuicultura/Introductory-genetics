@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Introductory genetics through tilapia breeding simulations</title>
-  <meta name="description" content="Introductory genetics through tilapia breeding simulations" />
+  <title>Chapter 4 Populations | Introductory genetics through tilapia breeding simulations</title>
+  <meta name="description" content="Chapter 4 Populations | Introductory genetics through tilapia breeding simulations" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Introductory genetics through tilapia breeding simulations" />
+  <meta property="og:title" content="Chapter 4 Populations | Introductory genetics through tilapia breeding simulations" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Introductory genetics through tilapia breeding simulations" />
+  <meta name="twitter:title" content="Chapter 4 Populations | Introductory genetics through tilapia breeding simulations" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="alphasimr.html"/>
+<link rel="prev" href="recombination.html"/>
+<link rel="next" href="physical-mapping-of-genomes.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -191,31 +191,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Introductory genetics through tilapia breeding simulations</h1>
-<p class="author"><em>PURA acuicultura</em></p>
-<p class="date"><em>2021-01-04</em></p>
+<div id="populations" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Populations</h1>
+<div id="introduction-3" class="section level2">
+<h2><span class="header-section-number">4.1</span> Introduction</h2>
+<p>In exploring markers and population genetics, <strong>AlphaSimR</strong> is used to create populations. In the assessment of markers and population genetics a few other libraries are used: <strong>Matrix</strong>, <strong>tidyverse</strong>, <strong>ape</strong>, <strong>ggtree</strong>, and <strong>phanghorn</strong>.</p>
+<p>The package <strong>ape</strong>, or ‘Analyses of Phylogenetics and Evolution’ is an integral package to population genetics. It is only superficially used here for the construction of neighbor joining trees based on true and marker-based genotypes. As implied in the likeness of name to <strong>ggplot</strong>, <strong>ggtree</strong> is principally used as a ‘presentation’ extension of population genetics data. Here it is used specifically for the side-by-side presentation of true and marker-based neighbor-joining trees. The <strong>phangorn</strong> package was used for it’s capacities to compare neighbor-joining trees. As is generally the case in R, one will come across a myriad of options for performing each of these tasks.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="populations.html#cb20-1"></a><span class="kw">library</span>(AlphaSimR)</span>
+<span id="cb20-2"><a href="populations.html#cb20-2"></a><span class="kw">library</span>(Matrix)</span>
+<span id="cb20-3"><a href="populations.html#cb20-3"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb20-4"><a href="populations.html#cb20-4"></a><span class="kw">library</span>(ape)</span>
+<span id="cb20-5"><a href="populations.html#cb20-5"></a><span class="kw">library</span>(ggtree)</span>
+<span id="cb20-6"><a href="populations.html#cb20-6"></a><span class="kw">library</span>(phangorn)</span></code></pre></div>
 </div>
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p>AlphaSimR is a powerful platform for carrying out breeding simulations. Rather than working in phenotypic measures, simulations in AlphaSimR are carried out at the level of genome. Any level of genomic architecture can be simulated. Chromosome number and length, segregation site and loci number, ploidy level, etc. are all programmable. In fact, the simulator is much more limited by our understanding of fish genomes than by its capabilities. In this chapter we will learn about AlphaSimR by doing. In understanding how AlphaSimR works it will be impossible to avoid a number of fundamental themes relating to genetics, including quantitative, population, and molecular. We will provide some necessary background, but no where near what is available in standard texts on the subjects. As such, look for recommended references for a deeper understanding. Specific goals of the chapter include:</p>
-<ol style="list-style-type: decimal">
-<li>Take a closer look at AlphaSimR and how it is used for breeding simulation</li>
-<li>Follow a small population through one generation to understand recombination</li>
-<li>Examine important measures of population genetics across multiple generations</li>
-<li>Develop an additive trait and examine the quantitative trait loci underlying the trait</li>
-<li>Learn how to create simple physical maps of the genome</li>
-<li>Develop ‘tilapia-like’ genomes and populations for breeding simulations</li>
-</ol>
+<div id="create-a-test-population" class="section level2">
+<h2><span class="header-section-number">4.2</span> Create a test population</h2>
+<p>As for our other examples we will start with a small genome and population before scaling up. The following code creates a population of 10 diploid individuals each with a single 1 morgan chromosome with 10 loci. Different from previous examples we also add five single nucleotide polymorphism (SNP) markers. Here, <strong>AlphaSimR</strong> randomly assigns the SNP markers to the previously developed loci. In our first proof, we will identify the physical location of these markers on our single chromosome. As we continue our exploration of markers and population genetics, we also begin exploring the differences between applied and theoretical breeding practices, a theme that will be re-visited throughout our breeding simulations.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="populations.html#cb21-1"></a>pop_haps &lt;-<span class="st"> </span><span class="kw">quickHaplo</span>(<span class="dt">nInd =</span> <span class="dv">10</span>, <span class="dt">nChr =</span> <span class="dv">1</span>, <span class="dt">segSites =</span> <span class="dv">10</span>, <span class="dt">genLen =</span> <span class="dv">1</span>, <span class="dt">ploidy =</span> 2L, <span class="dt">inbred =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb21-2"><a href="populations.html#cb21-2"></a>SP =<span class="st"> </span>SimParam<span class="op">$</span><span class="kw">new</span>(pop_haps)</span>
+<span id="cb21-3"><a href="populations.html#cb21-3"></a>SP<span class="op">$</span><span class="kw">addSnpChip</span>(<span class="dt">nSnpPerChr =</span> <span class="dv">5</span>,  <span class="dt">minSnpFreq =</span> <span class="ot">NULL</span>, <span class="dt">refPop =</span> <span class="ot">NULL</span>)</span>
+<span id="cb21-4"><a href="populations.html#cb21-4"></a>pop1 &lt;-<span class="st"> </span><span class="kw">newPop</span>(pop_haps, <span class="dt">simParam =</span> SP)</span></code></pre></div>
+</div>
+<div id="observe-gene-frequencies" class="section level2">
+<h2><span class="header-section-number">4.3</span> Observe gene frequencies</h2>
+<p>Through simulation we have access to information we wouldn’t under normal circumstances. For example, we can easily calculate the gene frequency of our entire population across every locus within the genome. This can be accomplished by using the <strong>pullSegSiteHaplo</strong> command. An <em>m haplotypes x n loci</em> matrix of binary haplotypes is produced. From the output, population-level gene frequencies at each loci can be achieved by counting either the 0’s or 1’s in each column and dividing by the total number of haplotypes, or rows. The script below actually calculates the frequency of <em>p</em> (0’s’s) through this approach and then <em>q</em> is computed as <em>1 - p</em>. The position of each locus in Morgans can be called by unlisting <strong><a href="mailto:pop_haps@genMap" class="email">pop_haps@genMap</a></strong>. The map and gene frequencies are combined into a data frame for later use.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="populations.html#cb22-1"></a>a1 &lt;-<span class="st"> </span><span class="kw">pullSegSiteHaplo</span>(<span class="dt">pop =</span> pop1,  <span class="dt">haplo =</span> <span class="st">&quot;all&quot;</span>, <span class="dt">chr =</span> <span class="dv">1</span>, <span class="dt">simParam =</span> SP)</span>
+<span id="cb22-2"><a href="populations.html#cb22-2"></a>a2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(a1, <span class="dt">nrow =</span> <span class="kw">nrow</span>(a1),  <span class="dt">ncol =</span> <span class="kw">ncol</span>(a1), <span class="dt">byrow =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb22-3"><a href="populations.html#cb22-3"></a>a3 &lt;-<span class="st"> </span><span class="kw">colSums</span>(a2 <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(a1)</span>
+<span id="cb22-4"><a href="populations.html#cb22-4"></a>a4 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">origin =</span> <span class="st">&quot;loci&quot;</span>, <span class="dt">pos =</span> <span class="kw">round</span>((<span class="kw">unlist</span>(pop_haps<span class="op">@</span>genMap)), <span class="dv">2</span>), <span class="dt">p =</span> a3, <span class="dt">q =</span> <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>a3)</span>
+<span id="cb22-5"><a href="populations.html#cb22-5"></a><span class="kw">head</span>(a4)</span></code></pre></div>
+<pre><code>##   origin  pos    p    q
+## 1   loci 0.00 0.45 0.55
+## 2   loci 0.11 0.45 0.55
+## 3   loci 0.22 0.40 0.60
+## 4   loci 0.33 0.60 0.40
+## 5   loci 0.44 0.55 0.45
+## 6   loci 0.56 0.65 0.35</code></pre>
+</div>
+<div id="observing-snp-haplotype-frequencies" class="section level2">
+<h2><span class="header-section-number">4.4</span> Observing SNP haplotype frequencies</h2>
+<p>In practice we wouldn’t ever know the population-level gene frequencies of every loci. For species such as Atlantic salmon, Rainbow trout, and Tilapia, it is now very possible that we could have SNP haplotype frequencies at a a good number of loci. Earlier, we added to our simulation parameters an SNP chip with five SNP along the 10 loci, 1 Morgan, single chromosome of our example genome. Consequently, there will be an average of 1 SNP to every 2 loci. This is unrealistic coverage of the genome with respect to loci, but something that will be addressed towards the end of the chapter.</p>
+<p>SNP haplotype frequencies can be achieved in a very similar manner to gene frequencies. The only differences being the <strong>pullSnpHaplo</strong> command is used to acquire the <em>m haplotypes x n loci</em> matrix of binary haplotypes, and the <strong>getSnpMap</strong> command is needed to access SNP physical map locations. The data format is identical to the gene frequencies for easy combining.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="populations.html#cb24-1"></a>b1 &lt;-<span class="st"> </span><span class="kw">pullSnpHaplo</span>(<span class="dt">pop =</span> pop1, <span class="dt">snpChip =</span> <span class="dv">1</span>, <span class="dt">haplo =</span> <span class="st">&#39;all&#39;</span>, <span class="dt">chr =</span> <span class="ot">NULL</span>, <span class="dt">simParam =</span> SP)</span>
+<span id="cb24-2"><a href="populations.html#cb24-2"></a>b2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(b1, <span class="dt">nrow =</span> <span class="kw">nrow</span>(a1), <span class="dt">ncol =</span> <span class="kw">ncol</span>(b1), <span class="dt">byrow =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb24-3"><a href="populations.html#cb24-3"></a>b3 &lt;-<span class="st"> </span><span class="kw">colSums</span>(b2 <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(b1)</span>
+<span id="cb24-4"><a href="populations.html#cb24-4"></a>b4 &lt;-<span class="st"> </span><span class="kw">getSnpMap</span>(<span class="dt">snpChip =</span> <span class="dv">1</span>, <span class="dt">simParam =</span> SP)</span>
+<span id="cb24-5"><a href="populations.html#cb24-5"></a>b5 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">origin =</span> <span class="st">&quot;snp&quot;</span>,  <span class="dt">pos =</span> <span class="kw">round</span>(b4[<span class="dv">3</span>], <span class="dv">2</span>),  <span class="dt">p =</span> b3, <span class="dt">q =</span> <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>b3)</span>
+<span id="cb24-6"><a href="populations.html#cb24-6"></a><span class="kw">head</span>(b5)</span></code></pre></div>
+<pre><code>##   origin site    p    q
+## 1    snp    1 0.45 0.55
+## 2    snp    2 0.45 0.55
+## 3    snp    5 0.55 0.45
+## 4    snp    8 0.50 0.50
+## 5    snp   10 0.50 0.50</code></pre>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="alphasimr.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="recombination.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="physical-mapping-of-genomes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -246,7 +284,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/pura-acuicultura/Introductory-genetics/edit/master/index.Rmd",
+"link": "https://github.com/pura-acuicultura/Introductory-genetics/edit/master/04-populations.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -254,7 +292,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/pura-acuicultura/Introductory-genetics/blob/master/index.Rmd",
+"link": "https://github.com/pura-acuicultura/Introductory-genetics/blob/master/04-populations.Rmd",
 "text": null
 },
 "download": null,

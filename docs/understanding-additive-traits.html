@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Understanding additive traits | Introductory genetics through tilapia breeding simulations</title>
+  <meta name="description" content="Chapter 6 Understanding additive traits | Introductory genetics through tilapia breeding simulations" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Understanding additive traits | Introductory genetics through tilapia breeding simulations" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Understanding additive traits | Introductory genetics through tilapia breeding simulations" />
+  
+  
+  
+
+<meta name="author" content="PURA acuicultura" />
+
+
+<meta name="date" content="2021-01-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="physical-mapping-of-genomes.html"/>
+<link rel="next" href="simulating-a-tilapia-like-genome.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introductory genetics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="alphasimr.html"><a href="alphasimr.html"><i class="fa fa-check"></i><b>2</b> AlphaSimR</a><ul>
+<li class="chapter" data-level="2.1" data-path="alphasimr.html"><a href="alphasimr.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="alphasimr.html"><a href="alphasimr.html#creating-founder-haplotypes"><i class="fa fa-check"></i><b>2.2</b> Creating founder haplotypes</a></li>
+<li class="chapter" data-level="2.3" data-path="alphasimr.html"><a href="alphasimr.html#setting-simulation-parameters"><i class="fa fa-check"></i><b>2.3</b> Setting simulation parameters</a></li>
+<li class="chapter" data-level="2.4" data-path="alphasimr.html"><a href="alphasimr.html#adding-traits-to-a-breeding-simulation"><i class="fa fa-check"></i><b>2.4</b> Adding traits to a breeding simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="recombination.html"><a href="recombination.html"><i class="fa fa-check"></i><b>3</b> Recombination</a><ul>
+<li class="chapter" data-level="3.1" data-path="recombination.html"><a href="recombination.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="recombination.html"><a href="recombination.html#create-parent-generation"><i class="fa fa-check"></i><b>3.2</b> Create parent generation</a></li>
+<li class="chapter" data-level="3.3" data-path="recombination.html"><a href="recombination.html#make-a-full-sib-family"><i class="fa fa-check"></i><b>3.3</b> Make a full-sib family</a></li>
+<li class="chapter" data-level="3.4" data-path="recombination.html"><a href="recombination.html#haplotypes-of-the-parent-generation"><i class="fa fa-check"></i><b>3.4</b> Haplotypes of the parent generation</a></li>
+<li class="chapter" data-level="3.5" data-path="recombination.html"><a href="recombination.html#haplotypes-of-the-offspring-generation"><i class="fa fa-check"></i><b>3.5</b> Haplotypes of the offspring generation</a></li>
+<li class="chapter" data-level="3.6" data-path="recombination.html"><a href="recombination.html#assigning-parental-haplotypes-to-offspring-haplotypes"><i class="fa fa-check"></i><b>3.6</b> Assigning parental haplotypes to offspring haplotypes</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="populations.html"><a href="populations.html"><i class="fa fa-check"></i><b>4</b> Populations</a><ul>
+<li class="chapter" data-level="4.1" data-path="populations.html"><a href="populations.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="populations.html"><a href="populations.html#create-a-test-population"><i class="fa fa-check"></i><b>4.2</b> Create a test population</a></li>
+<li class="chapter" data-level="4.3" data-path="populations.html"><a href="populations.html#observe-gene-frequencies"><i class="fa fa-check"></i><b>4.3</b> Observe gene frequencies</a></li>
+<li class="chapter" data-level="4.4" data-path="populations.html"><a href="populations.html#observing-snp-haplotype-frequencies"><i class="fa fa-check"></i><b>4.4</b> Observing SNP haplotype frequencies</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="physical-mapping-of-genomes.html"><a href="physical-mapping-of-genomes.html"><i class="fa fa-check"></i><b>5</b> Physical mapping of genomes</a><ul>
+<li class="chapter" data-level="5.1" data-path="physical-mapping-of-genomes.html"><a href="physical-mapping-of-genomes.html#introduction-4"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="understanding-additive-traits.html"><a href="understanding-additive-traits.html"><i class="fa fa-check"></i><b>6</b> Understanding additive traits</a><ul>
+<li class="chapter" data-level="6.1" data-path="understanding-additive-traits.html"><a href="understanding-additive-traits.html#introduction-5"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="understanding-additive-traits.html"><a href="understanding-additive-traits.html#simulating-a-population-to-explore-additive-traits"><i class="fa fa-check"></i><b>6.2</b> Simulating a population to explore additive traits</a></li>
+<li class="chapter" data-level="6.3" data-path="understanding-additive-traits.html"><a href="understanding-additive-traits.html#breeding-genetic-and-phenotypic-value"><i class="fa fa-check"></i><b>6.3</b> Breeding, genetic, and phenotypic value</a></li>
+<li class="chapter" data-level="6.4" data-path="understanding-additive-traits.html"><a href="understanding-additive-traits.html#heritability-of-additive-traits"><i class="fa fa-check"></i><b>6.4</b> Heritability of additive traits</a></li>
+<li class="chapter" data-level="6.5" data-path="understanding-additive-traits.html"><a href="understanding-additive-traits.html#individual-qtl-effects"><i class="fa fa-check"></i><b>6.5</b> Individual QTL effects</a></li>
+<li class="chapter" data-level="6.6" data-path="understanding-additive-traits.html"><a href="understanding-additive-traits.html#genome-wide-association-of-additive-traits"><i class="fa fa-check"></i><b>6.6</b> Genome wide association of additive traits</a></li>
+<li class="chapter" data-level="6.7" data-path="understanding-additive-traits.html"><a href="understanding-additive-traits.html#qtl-mapping"><i class="fa fa-check"></i><b>6.7</b> QTL mapping</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="simulating-a-tilapia-like-genome.html"><a href="simulating-a-tilapia-like-genome.html"><i class="fa fa-check"></i><b>7</b> Simulating a tilapia like genome</a><ul>
+<li class="chapter" data-level="7.1" data-path="simulating-a-tilapia-like-genome.html"><a href="simulating-a-tilapia-like-genome.html#introduction-6"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introductory genetics through tilapia breeding simulations</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="understanding-additive-traits" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Understanding additive traits</h1>
+<div id="introduction-5" class="section level2">
+<h2><span class="header-section-number">6.1</span> Introduction</h2>
+<p>Additive genetic variation is the only heritable variance component, and as such, the most important to selection.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="understanding-additive-traits.html#cb26-1"></a><span class="kw">library</span>(AlphaSimR)</span>
+<span id="cb26-2"><a href="understanding-additive-traits.html#cb26-2"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb26-3"><a href="understanding-additive-traits.html#cb26-3"></a><span class="kw">library</span>(gridExtra)</span>
+<span id="cb26-4"><a href="understanding-additive-traits.html#cb26-4"></a><span class="kw">library</span>(chromPlot)</span>
+<span id="cb26-5"><a href="understanding-additive-traits.html#cb26-5"></a><span class="kw">library</span>(ggrepel)</span></code></pre></div>
+</div>
+<div id="simulating-a-population-to-explore-additive-traits" class="section level2">
+<h2><span class="header-section-number">6.2</span> Simulating a population to explore additive traits</h2>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="understanding-additive-traits.html#cb27-1"></a>pop_haps &lt;-<span class="st"> </span><span class="kw">quickHaplo</span>(<span class="dt">nInd =</span> <span class="dv">1000</span>,      </span>
+<span id="cb27-2"><a href="understanding-additive-traits.html#cb27-2"></a>                       <span class="dt">nChr =</span> <span class="dv">1</span>,      </span>
+<span id="cb27-3"><a href="understanding-additive-traits.html#cb27-3"></a>                       <span class="dt">segSites =</span> <span class="dv">100</span>, </span>
+<span id="cb27-4"><a href="understanding-additive-traits.html#cb27-4"></a>                       <span class="dt">genLen =</span> <span class="dv">1</span>,   </span>
+<span id="cb27-5"><a href="understanding-additive-traits.html#cb27-5"></a>                       <span class="dt">ploidy =</span> 2L,   </span>
+<span id="cb27-6"><a href="understanding-additive-traits.html#cb27-6"></a>                       <span class="dt">inbred =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb27-7"><a href="understanding-additive-traits.html#cb27-7"></a></span>
+<span id="cb27-8"><a href="understanding-additive-traits.html#cb27-8"></a>SP &lt;-<span class="st"> </span>SimParam<span class="op">$</span><span class="kw">new</span>(pop_haps)</span>
+<span id="cb27-9"><a href="understanding-additive-traits.html#cb27-9"></a></span>
+<span id="cb27-10"><a href="understanding-additive-traits.html#cb27-10"></a>SP<span class="op">$</span><span class="kw">addTraitA</span>(<span class="dt">nQtlPerChr =</span> <span class="dv">10</span>, <span class="co"># number of QTL for trait</span></span>
+<span id="cb27-11"><a href="understanding-additive-traits.html#cb27-11"></a>             <span class="dt">mean =</span> <span class="dv">100</span>, <span class="co"># mean genetic value of the trait</span></span>
+<span id="cb27-12"><a href="understanding-additive-traits.html#cb27-12"></a>             <span class="dt">var =</span> <span class="dv">10</span>, <span class="co"># variance of trait</span></span>
+<span id="cb27-13"><a href="understanding-additive-traits.html#cb27-13"></a>             <span class="dt">corA =</span> <span class="ot">NULL</span>, <span class="co"># matrix of correlations between additive effects</span></span>
+<span id="cb27-14"><a href="understanding-additive-traits.html#cb27-14"></a>             <span class="dt">gamma =</span> <span class="ot">FALSE</span>,  <span class="co"># to use a gamma distribution in place of a normal distribution</span></span>
+<span id="cb27-15"><a href="understanding-additive-traits.html#cb27-15"></a>             <span class="dt">shape =</span> <span class="dv">1</span>, <span class="co"># shape parameter for gamma distribution only</span></span>
+<span id="cb27-16"><a href="understanding-additive-traits.html#cb27-16"></a>             <span class="dt">force =</span> <span class="ot">FALSE</span>) <span class="co"># keep false until this is understood!</span></span>
+<span id="cb27-17"><a href="understanding-additive-traits.html#cb27-17"></a></span>
+<span id="cb27-18"><a href="understanding-additive-traits.html#cb27-18"></a>SP<span class="op">$</span><span class="kw">setVarE</span>(<span class="dt">h2 =</span> <span class="fl">0.5</span>, <span class="co"># narrow sense heritability</span></span>
+<span id="cb27-19"><a href="understanding-additive-traits.html#cb27-19"></a>           <span class="dt">H2 =</span> <span class="ot">NULL</span>, <span class="co"># broad sense heritability</span></span>
+<span id="cb27-20"><a href="understanding-additive-traits.html#cb27-20"></a>           <span class="dt">varE =</span> <span class="ot">NULL</span>) <span class="co"># error variance</span></span>
+<span id="cb27-21"><a href="understanding-additive-traits.html#cb27-21"></a></span>
+<span id="cb27-22"><a href="understanding-additive-traits.html#cb27-22"></a>pop_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="kw">newPop</span>(pop_haps, </span>
+<span id="cb27-23"><a href="understanding-additive-traits.html#cb27-23"></a>                <span class="dt">simParam =</span> SP)</span></code></pre></div>
+</div>
+<div id="breeding-genetic-and-phenotypic-value" class="section level2">
+<h2><span class="header-section-number">6.3</span> Breeding, genetic, and phenotypic value</h2>
+<p>In creating an additive trait and defining an environmental variance, AlphaSimR assigns a phenotypic value to each individual. The phenotypic value is based in part on the genotype of each individual at the designated quantitative trait loci (QTL), and part on the environmental variance parameter set when we defined narrow sense heritability as 0.5. In quantitative genetic terms, the phenotypes were simulated through a combination of non-random genetic and random environmental effects. Given our trait is completely additive, genetic effects are synonymous with additive effects in this particular case.</p>
+<p>In the real world we would only know the phenotypes. It would then be our job to partition the phenotypic variance into additive and environmental effects at the very least. In fact, this is what we will be doing in Chapters 2-6. For the purpose of this exercise, we can take advantage of the fact that this is a simulation and ‘call’ our effects directly. The following code calls individual phenotypic, genetic, and breeding values, and arranges them in a data frame.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="understanding-additive-traits.html#cb28-1"></a>pv_gram &lt;-<span class="st"> </span><span class="kw">pheno</span>(pop_<span class="dv">0</span>)</span>
+<span id="cb28-2"><a href="understanding-additive-traits.html#cb28-2"></a>gv_gram &lt;-<span class="st"> </span><span class="kw">gv</span>(pop_<span class="dv">0</span>)</span>
+<span id="cb28-3"><a href="understanding-additive-traits.html#cb28-3"></a>bv_gram &lt;-<span class="st"> </span><span class="kw">bv</span>(pop_<span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="kw">mean</span>(<span class="kw">gv</span>(pop_<span class="dv">0</span>))</span>
+<span id="cb28-4"><a href="understanding-additive-traits.html#cb28-4"></a>pv_norm &lt;-<span class="st"> </span><span class="kw">pheno</span>(pop_<span class="dv">0</span>) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(<span class="kw">pheno</span>(pop_<span class="dv">0</span>))</span>
+<span id="cb28-5"><a href="understanding-additive-traits.html#cb28-5"></a>gv_norm &lt;-<span class="st"> </span><span class="kw">gv</span>(pop_<span class="dv">0</span>) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(<span class="kw">gv</span>(pop_<span class="dv">0</span>))</span>
+<span id="cb28-6"><a href="understanding-additive-traits.html#cb28-6"></a>bv_norm &lt;-<span class="st"> </span><span class="kw">bv</span>(pop_<span class="dv">0</span>)</span>
+<span id="cb28-7"><a href="understanding-additive-traits.html#cb28-7"></a></span>
+<span id="cb28-8"><a href="understanding-additive-traits.html#cb28-8"></a>ind_vals &lt;-<span class="st"> </span><span class="kw">data.frame</span>(pv_gram, gv_gram, bv_gram, pv_norm, gv_norm, bv_norm)</span>
+<span id="cb28-9"><a href="understanding-additive-traits.html#cb28-9"></a><span class="kw">head</span>(<span class="kw">round</span>(ind_vals, <span class="dv">2</span>))</span></code></pre></div>
+<pre><code>##   pv_gram gv_gram bv_gram pv_norm gv_norm bv_norm
+## 1   96.17   97.48   97.48   -3.81   -2.52   -2.52
+## 2   95.08   95.58   95.58   -4.90   -4.42   -4.42
+## 3  100.97  100.86  100.86    0.99    0.86    0.86
+## 4  100.09  105.33  105.33    0.12    5.33    5.33
+## 5  102.45   97.52   97.52    2.47   -2.48   -2.48
+## 6   98.31   99.28   99.28   -1.66   -0.72   -0.72</code></pre>
+<p>From the first few lines it seems genetic values and breeding values are the same. This makes sense since our simulation includes neither dominance, epistatic, or GxE effects. As such, genetic values equal breeding values which in turn derived from the additive component of phenotypic variance. Given that the estimation of breeding values is a principle theme throughout later chapters further details are limited here. However, it should be understood that the called breeding values are ‘true’ breeding values and not derivations arrived at through phenotypic analysis. True breeding values, of course, are vitally important to the assessment of the breeding value estimates arrived through simulation.</p>
+<p>Through a plot of individual breeding values as a function of phenotypic values we can visualize some fundamental concepts to genetics and breeding.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="understanding-additive-traits.html#cb30-1"></a>plot_gram &lt;-<span class="st"> </span>ind_vals <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> pv_gram, <span class="dt">y =</span> bv_gram)) <span class="op">+</span></span>
+<span id="cb30-2"><a href="understanding-additive-traits.html#cb30-2"></a><span class="st">                                     </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb30-3"><a href="understanding-additive-traits.html#cb30-3"></a><span class="st">                                     </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&#39;lm&#39;</span>, <span class="dt">formula=</span> y <span class="op">~</span><span class="st"> </span>x)</span>
+<span id="cb30-4"><a href="understanding-additive-traits.html#cb30-4"></a></span>
+<span id="cb30-5"><a href="understanding-additive-traits.html#cb30-5"></a>plot_norm &lt;-<span class="st"> </span>ind_vals <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> pv_norm, <span class="dt">y =</span> bv_norm)) <span class="op">+</span></span>
+<span id="cb30-6"><a href="understanding-additive-traits.html#cb30-6"></a><span class="st">                                     </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb30-7"><a href="understanding-additive-traits.html#cb30-7"></a><span class="st">                                     </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&#39;lm&#39;</span>, <span class="dt">formula=</span> y <span class="op">~</span><span class="st"> </span>x)</span>
+<span id="cb30-8"><a href="understanding-additive-traits.html#cb30-8"></a></span>
+<span id="cb30-9"><a href="understanding-additive-traits.html#cb30-9"></a><span class="kw">grid.arrange</span>(plot_gram, plot_norm, <span class="dt">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/at_bv%20phenotype%20plots-1.png" width="960" /></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="understanding-additive-traits.html#cb31-1"></a>gram_mod &lt;-<span class="st"> </span><span class="kw">lm</span>(bv_gram <span class="op">~</span><span class="st"> </span>pv_gram, <span class="dt">data =</span> ind_vals)</span>
+<span id="cb31-2"><a href="understanding-additive-traits.html#cb31-2"></a>norm_mod &lt;-<span class="st"> </span><span class="kw">lm</span>(bv_norm <span class="op">~</span><span class="st"> </span>pv_norm, <span class="dt">data =</span> ind_vals)</span>
+<span id="cb31-3"><a href="understanding-additive-traits.html#cb31-3"></a></span>
+<span id="cb31-4"><a href="understanding-additive-traits.html#cb31-4"></a>y_int &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">coef</span>(gram_mod)[<span class="dv">1</span>], <span class="kw">coef</span>(norm_mod)[<span class="dv">1</span>])</span>
+<span id="cb31-5"><a href="understanding-additive-traits.html#cb31-5"></a>slope &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">coef</span>(gram_mod)[<span class="dv">2</span>], <span class="kw">coef</span>(norm_mod)[<span class="dv">2</span>])</span>
+<span id="cb31-6"><a href="understanding-additive-traits.html#cb31-6"></a>herit &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">cov</span>(ind_vals<span class="op">$</span>pv_gram, ind_vals<span class="op">$</span>bv_gram) <span class="op">/</span><span class="st"> </span><span class="kw">var</span>(ind_vals<span class="op">$</span>pv_gram),</span>
+<span id="cb31-7"><a href="understanding-additive-traits.html#cb31-7"></a>           <span class="kw">cov</span>(ind_vals<span class="op">$</span>pv_norm, ind_vals<span class="op">$</span>bv_norm) <span class="op">/</span><span class="st"> </span><span class="kw">var</span>(ind_vals<span class="op">$</span>pv_norm))</span>
+<span id="cb31-8"><a href="understanding-additive-traits.html#cb31-8"></a>accur &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">cor</span>(ind_vals<span class="op">$</span>pv_gram, ind_vals<span class="op">$</span>bv_gram),</span>
+<span id="cb31-9"><a href="understanding-additive-traits.html#cb31-9"></a>           <span class="kw">cor</span>(ind_vals<span class="op">$</span>pv_norm, ind_vals<span class="op">$</span>bv_norm))</span>
+<span id="cb31-10"><a href="understanding-additive-traits.html#cb31-10"></a></span>
+<span id="cb31-11"><a href="understanding-additive-traits.html#cb31-11"></a>pop_stats &lt;-<span class="st"> </span><span class="kw">data.frame</span>(y_int, slope, herit, accur)</span>
+<span id="cb31-12"><a href="understanding-additive-traits.html#cb31-12"></a><span class="kw">round</span>(pop_stats, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##          y_int slope herit accur
+## pv_gram 48.704 0.513 0.513 0.718
+## pv_norm  0.000 0.513 0.513 0.718</code></pre>
+</div>
+<div id="heritability-of-additive-traits" class="section level2">
+<h2><span class="header-section-number">6.4</span> Heritability of additive traits</h2>
+<p>We just demonstrated that the phenotype of an additive trait is derived from two components, a nonrandom additive component and a random environmental component. We will momentarily delve deeper into the additive component, but take a moment here to further explore random environmental effects. In some animal breeding texts you will hear environmental effects described as ‘nuisance’ effects. This is an apt description given the definition of nuisance as, “a circumstance causing inconvenience or annoyance”. The reason environmental effects can become a nuisance stems from the fact that unlike additive effects that are correlative to genotypes, environmental effects are random.</p>
+<p>The exploration of random variables is frequently performed using Monte Carlo simulations. As you might expect, R has a number of tools to support the development and analysis of Monte Carlo simulations. As a general guide, a function under the influence of a random variable is first written and the repeated using a function from the <strong>apply</strong> family. The following code creates a function called <strong>h2_MC</strong> from the population simulation script employed at the beginning of the chapter. The function takes a single argument, heritability, and returns the calculated heritability and accuracy of the simulated population. Each time the script is run all individuals are assigned a phenotype that is in turn based on a genotype-dependent breeding value and a random environmental effect. In this case, the random environmental effect is the objective of the Monte Carlo simulation.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="understanding-additive-traits.html#cb33-1"></a>h2_MC &lt;-<span class="st"> </span><span class="cf">function</span>(h2){</span>
+<span id="cb33-2"><a href="understanding-additive-traits.html#cb33-2"></a>         pop_haps &lt;-<span class="st"> </span><span class="kw">quickHaplo</span>(<span class="dt">nInd =</span> <span class="dv">10</span>, <span class="dt">nChr =</span> <span class="dv">1</span>, <span class="dt">segSites =</span> <span class="dv">100</span>, <span class="dt">genLen =</span> <span class="dv">1</span>, <span class="dt">ploidy =</span> 2L, <span class="dt">inbred =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb33-3"><a href="understanding-additive-traits.html#cb33-3"></a>         SP =<span class="st"> </span>SimParam<span class="op">$</span><span class="kw">new</span>(pop_haps)</span>
+<span id="cb33-4"><a href="understanding-additive-traits.html#cb33-4"></a>         SP<span class="op">$</span><span class="kw">addTraitA</span>(<span class="dt">nQtlPerChr =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">100</span>, <span class="dt">var =</span> <span class="dv">10</span>, <span class="dt">corA =</span> <span class="ot">NULL</span>, <span class="dt">gamma =</span> <span class="ot">FALSE</span>, <span class="dt">shape =</span> <span class="dv">1</span>, <span class="dt">force =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb33-5"><a href="understanding-additive-traits.html#cb33-5"></a>         SP<span class="op">$</span><span class="kw">setVarE</span>(<span class="dt">h2 =</span> h2, <span class="dt">H2 =</span> <span class="ot">NULL</span>, <span class="dt">varE =</span> <span class="ot">NULL</span>)</span>
+<span id="cb33-6"><a href="understanding-additive-traits.html#cb33-6"></a>         pop_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="kw">newPop</span>(pop_haps, <span class="dt">simParam =</span> SP)</span>
+<span id="cb33-7"><a href="understanding-additive-traits.html#cb33-7"></a>         <span class="kw">return</span>(<span class="kw">list</span>(<span class="kw">cov</span>(pop_<span class="dv">0</span><span class="op">@</span>pheno, pop_<span class="dv">0</span><span class="op">@</span>gv) <span class="op">/</span><span class="st"> </span><span class="kw">var</span>(pop_<span class="dv">0</span><span class="op">@</span>pheno), <span class="kw">cor</span>(pop_<span class="dv">0</span><span class="op">@</span>pheno, pop_<span class="dv">0</span><span class="op">@</span>gv)))}</span></code></pre></div>
+<p>After creating the function we can now use the <strong>lapply</strong> function to simulate population development as many times as we want. The following code simulates one thousand populations with a parameter heritability setting of 0.5, and returns the calculated heritability and accuracy. Results are returned as nested list items and then converted into a data frame for plotting as histograms. Histograms of both heritability and accuracy are produced.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="understanding-additive-traits.html#cb34-1"></a>mc_results &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">rep</span>(<span class="fl">0.5</span>, <span class="dv">1000</span>), h2_MC)</span>
+<span id="cb34-2"><a href="understanding-additive-traits.html#cb34-2"></a>h2 &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">sapply</span>(mc_results, <span class="cf">function</span>(x) x[<span class="dv">1</span>]))</span>
+<span id="cb34-3"><a href="understanding-additive-traits.html#cb34-3"></a>r2 &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">sapply</span>(mc_results, <span class="cf">function</span>(x) x[<span class="dv">2</span>]))</span>
+<span id="cb34-4"><a href="understanding-additive-traits.html#cb34-4"></a>mc_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(h2, r2)</span>
+<span id="cb34-5"><a href="understanding-additive-traits.html#cb34-5"></a></span>
+<span id="cb34-6"><a href="understanding-additive-traits.html#cb34-6"></a>plot_h2 &lt;-<span class="st"> </span>mc_df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb34-7"><a href="understanding-additive-traits.html#cb34-7"></a><span class="st">                     </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> h2), </span>
+<span id="cb34-8"><a href="understanding-additive-traits.html#cb34-8"></a>                                    <span class="dt">binwidth =</span> <span class="fl">0.05</span>,</span>
+<span id="cb34-9"><a href="understanding-additive-traits.html#cb34-9"></a>                                    <span class="dt">color =</span> <span class="st">&#39;black&#39;</span>,</span>
+<span id="cb34-10"><a href="understanding-additive-traits.html#cb34-10"></a>                                    <span class="dt">fill =</span> <span class="st">&#39;blue&#39;</span>,</span>
+<span id="cb34-11"><a href="understanding-additive-traits.html#cb34-11"></a>                                    <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
+<span id="cb34-12"><a href="understanding-additive-traits.html#cb34-12"></a><span class="st">                     </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb34-13"><a href="understanding-additive-traits.html#cb34-13"></a>plot_r2 &lt;-<span class="st"> </span>mc_df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb34-14"><a href="understanding-additive-traits.html#cb34-14"></a><span class="st">                     </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> r2),</span>
+<span id="cb34-15"><a href="understanding-additive-traits.html#cb34-15"></a>                                    <span class="dt">binwidth =</span> <span class="fl">0.05</span>,</span>
+<span id="cb34-16"><a href="understanding-additive-traits.html#cb34-16"></a>                                    <span class="dt">color =</span> <span class="st">&#39;black&#39;</span>,</span>
+<span id="cb34-17"><a href="understanding-additive-traits.html#cb34-17"></a>                                    <span class="dt">fill =</span> <span class="st">&quot;light blue&quot;</span>,</span>
+<span id="cb34-18"><a href="understanding-additive-traits.html#cb34-18"></a>                                    <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
+<span id="cb34-19"><a href="understanding-additive-traits.html#cb34-19"></a><span class="st">                     </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb34-20"><a href="understanding-additive-traits.html#cb34-20"></a></span>
+<span id="cb34-21"><a href="understanding-additive-traits.html#cb34-21"></a><span class="kw">grid.arrange</span>(plot_h2, plot_r2, <span class="dt">nrow =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/at_monte%20carlo%20plots-1.png" width="960" /></p>
+<p>Through the Monte Carlo simulation we find more variation than we might expect. In terms of heritability, a fairly normal distribution centered on, or near, the simulation parameter of 0.5 is noted. Deviations from 0.5 are not reflective of additive effects accounting for more or less than 50% of the phenotype, but rather correlations between additive and environmental effects. For example, if smaller fish are randomly assigned larger environmental component and larger fish smaller environmental effects, observed heritability decreases. If larger fish are randomly assigned larger environmental effects and smaller fish smaller environmental effects, heritability increases. It is important to note that in this case such correlations are arising randomly and not systematically. Evidence for randomness is in the heritability distribution itself. If the center of our distribution was significantly different from 0.5, we would have to consider why our simulation is resulting in underlying gene x environment effects.</p>
+<p>If we now turn our attention to our distribution of prediction accuracy. We can see that rather than being normal, our distribution is skewed to the right and has a long left hand tail. In fact, rather than being normal the resulting accuracies resemble a beta distribution. This is quite normal for random variables with finite intervals such as R2 values that should always be between 0 and 1. It is only strange in that we don’t see the same for heritability when it increases towards 1, the theoretical limit. Heritability, however, is not mathematically constrained to this interval. In our particular case, heritability can exceed values of 1 by ‘unknowingly’ including GE effects in the numerator and not in the denominator.</p>
+<p>It is also important to understand the relationship between heritability and accuracy. Accuracy, of course, is a measure of the degree to which we can predict phenotype from a breeding value. Due to its random nature, environmental variation itself reduces accuracy of</p>
+</div>
+<div id="individual-qtl-effects" class="section level2">
+<h2><span class="header-section-number">6.5</span> Individual QTL effects</h2>
+</div>
+<div id="genome-wide-association-of-additive-traits" class="section level2">
+<h2><span class="header-section-number">6.6</span> Genome wide association of additive traits</h2>
+</div>
+<div id="qtl-mapping" class="section level2">
+<h2><span class="header-section-number">6.7</span> QTL mapping</h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="physical-mapping-of-genomes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="simulating-a-tilapia-like-genome.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/pura-acuicultura/Introductory-genetics/edit/master/06-additive_traits.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/pura-acuicultura/Introductory-genetics/blob/master/06-additive_traits.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

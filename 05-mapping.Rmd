@@ -1,0 +1,18 @@
+---
+title: "Physical mapping"
+author: "PURA acuicultura"
+date: "1/4/2021"
+output: html_document
+---
+
+# Physical mapping of genomes
+
+```{r map_setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+```{r map_libraries}
+
+```

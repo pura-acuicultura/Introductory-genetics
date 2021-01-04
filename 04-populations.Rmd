@@ -1,0 +1,65 @@
+---
+title: "Markers and population genetics"
+author: "James Webb"
+date: "8/31/2020"
+output: html_document
+---
+
+# Populations
+
+```{r pop_setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+In exploring markers and population genetics, **AlphaSimR** is used to create populations. In the assessment of markers and population genetics a few other libraries are used: **Matrix**, **tidyverse**, **ape**, **ggtree**, and **phanghorn**.
+
+The package **ape**, or 'Analyses of Phylogenetics and Evolution' is an integral package to population genetics. It is only superficially used here for the construction of neighbor joining trees based on true and marker-based genotypes. As implied in the likeness of name to **ggplot**, **ggtree** is principally used as a 'presentation' extension of population genetics data. Here it is used specifically for the side-by-side presentation of true and marker-based neighbor-joining trees. The **phangorn** package was used for it's capacities to compare neighbor-joining trees. As is generally the case in R, one will come across a myriad of options for performing each of these tasks.
+
+```{r pop_libraries, echo = TRUE, results = 'hide', message = FALSE, warning = FALSE}
+library(AlphaSimR)
+library(Matrix)
+library(tidyverse)
+library(ape)
+library(ggtree)
+library(phangorn)
+```
+
+## Create a test population
+As for our other examples we will start with a small genome and population before scaling up. The following code creates a population of 10 diploid individuals each with a single 1 morgan chromosome with 10 loci. Different from previous examples we also add five single nucleotide polymorphism (SNP) markers. Here, **AlphaSimR** randomly assigns the SNP markers to the previously developed loci. In our first proof, we will identify the physical location of these markers on our single chromosome. As we continue our exploration of markers and population genetics, we also begin exploring the differences between applied and theoretical breeding practices, a theme that will be re-visited throughout our breeding simulations.
+
+```{r pop_test pop, echo=TRUE}
+pop_haps <- quickHaplo(nInd = 10, nChr = 1, segSites = 10, genLen = 1, ploidy = 2L, inbred = FALSE)
+SP = SimParam$new(pop_haps)
+SP$addSnpChip(nSnpPerChr = 5,  minSnpFreq = NULL, refPop = NULL)
+pop1 <- newPop(pop_haps, simParam = SP)
+```
+
+## Observe gene frequencies
+Through simulation we have access to information we wouldn't under normal circumstances. For example, we can easily calculate the gene frequency of our entire population across every locus within the genome. This can be accomplished by using the **pullSegSiteHaplo** command. An *m haplotypes x n loci* matrix of binary haplotypes is produced. From the output, population-level gene frequencies at each loci can be achieved by counting either the 0's or 1's in each column and dividing by the total number of haplotypes, or rows. The script below actually calculates the frequency of *p* (0's's) through this approach and then *q* is computed as *1 - p*. The position of each locus in Morgans can be called by unlisting **pop_haps@genMap**. The map and gene frequencies are combined into a data frame for later use.
+
+```{r pop_gene frequencies, echo = TRUE}
+a1 <- pullSegSiteHaplo(pop = pop1,  haplo = "all", chr = 1, simParam = SP)
+a2 <- matrix(a1, nrow = nrow(a1),  ncol = ncol(a1), byrow = FALSE)
+a3 <- colSums(a2 == 0) / nrow(a1)
+a4 <- data.frame(origin = "loci", pos = round((unlist(pop_haps@genMap)), 2), p = a3, q = 1 - a3)
+head(a4)
+```
+
+## Observing SNP haplotype frequencies
+In practice we wouldn't ever know the population-level gene frequencies of every loci. For species such as Atlantic salmon, Rainbow trout, and Tilapia, it is now very possible that we could have SNP haplotype frequencies at a a good number of loci. Earlier, we added to our simulation parameters an SNP chip with five SNP along the 10 loci, 1 Morgan, single chromosome of our example genome. Consequently, there will be an average of 1 SNP to every 2 loci. This is unrealistic coverage of the genome with respect to loci, but something that will be addressed towards the end of the chapter.
+
+SNP haplotype frequencies can be achieved in a very similar manner to gene frequencies. The only differences being the **pullSnpHaplo** command is used to acquire the *m haplotypes x n loci* matrix of binary haplotypes, and the **getSnpMap** command is needed to access SNP physical map locations. The data format is identical to the gene frequencies for easy combining.
+
+```{r pop_snp haplotype frequencies, echo = TRUE}
+b1 <- pullSnpHaplo(pop = pop1, snpChip = 1, haplo = 'all', chr = NULL, simParam = SP)
+b2 <- matrix(b1, nrow = nrow(a1), ncol = ncol(b1), byrow = FALSE)
+b3 <- colSums(b2 == 0) / nrow(b1)
+b4 <- getSnpMap(snpChip = 1, simParam = SP)
+b5 <- data.frame(origin = "snp",  pos = round(b4[3], 2),  p = b3, q = 1 - b3)
+head(b5)
+```
+
+
+
+

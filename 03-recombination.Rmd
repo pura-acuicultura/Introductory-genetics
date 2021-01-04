@@ -1,0 +1,106 @@
+---
+title: "Recombination in AlphaSimR"
+author: "James Webb"
+date: "8/23/2020"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# Recombination
+
+```{r rc_setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+In exploring recombination, **AlphaSimR** is used to create parents and make full sib families. In the assessment of recombination a few other libraries are used: **Matrix**, **tidyverse**, and **gridExtra**.
+
+```{r rc_intro, echo = TRUE, results = 'hide', message = FALSE, warning = FALSE}
+library(AlphaSimR)
+library(Matrix)
+library(tidyverse)
+library(gridExtra)
+```
+
+## Create parent generation
+To understand how recombination works in **AlphaSimR** we start with a simple model that can be built upon later. We start by using the **quickHaplo** command to create two parent fish, each diploid with a single chromosome having 10 segregation sites. The length of the chromosome in Morgans is a key determinant of recombination. We will start with a value of 1 cM and then explore how chromosome length impacts recombination.
+
+```{r rc_parents, echo=TRUE}
+founderPop <- quickHaplo(nInd = 2, nChr = 1, segSites = 10, genLen = 1, ploidy = 2L, inbred = FALSE)
+SP <- SimParam$new(founderPop)
+pop1 <- newPop(founderPop, simParam = SP)
+```
+
+## Make a full-sib family
+Meiotic recombination in parent fish can be observed in the haplotypes of their offspring. We use the **makeCross** command to simulate the cross. The command requires a cross plan in the form of a two column matrix. The rows of the matrix correspond to the cross and the columns indicate the parents. We make only a single cross of parents 1 and 2. Consequently, our cross plan matrix is straightforward.
+
+```{r rc_cross plan, echo = TRUE}
+crossPlan <- matrix(c(1, 2), nrow = 1, ncol = 2)
+crossPlan
+```
+
+Aside from the cross plan, we only need to specify the number of progeny to create. High fecundity in fish is statistically convenient with regards to progeny analysis. We start with a relatively modest 10 progeny but can increase the progeny number to 100 or more later.
+
+```{r rc_offspring, echo = TRUE}
+pop2 <- makeCross(pop = pop1, crossPlan = crossPlan, nProgeny = 10, simParam = SP)
+```
+
+## Haplotypes of the parent generation
+In performing a simulation we have access to information that would be difficult or near impossible to achieve in the real world. Phased haplotypes are one such piece of information, that is also important in the analysis of recombination. We discuss how phased haplotypes can be predicted from actual SNP data in a later chapter. Since our goal here is to understand recombination in **AlphaSimR**, we simply pull them from the simulation.     
+
+We start with the parent haplotypes. We pull the haplotypes using the **pullSegSiteHaplo** command. A matrix of binary haplotypes is returned by parent (m = 4) and loci (n = 10). More specifically, row 1 corresponds to parent 1 / haplotype 1, row 2 to parent 1 / haplotype 2, row 3 to parent 2 / haplotype 1, and row 4 to parent 2 / haplotype 2. As such, column 1, referred to as 'SITE_1', corresponds to the binary allele (0/1) present at loci 1 of the four parents. Subsequent columns correspond to the remaining alleles designated by our **founderPop**. Now you can appreciate why we started with a small example.  
+
+```{r rc_haplos}
+par_H <- pullSegSiteHaplo(pop = pop1, haplo = "all", chr = 1, simParam = SP)
+par_H
+```
+
+Here we clean up the matrix for some downstream analysis. If we define matrix dimensions and names with **Pop-Class** objects we won't have to rewrite the code every time we increase the number of parents or segregation sites. The number of rows, or number of parental haplotypes, can be expressed as the number of parents (**pop1@nInd**) multiplied by their ploidy (**pop1@ploidy**) . The number of columns, or number of loci, can be directly called as **pop1@nLoci**. In naming the loci using **1:pop1@nLoci** a dynamic vector accommodating any number of loci is employed.
+
+```{r rc_haplos1}
+par_H <- matrix(par_H,  nrow = pop1@nInd * pop1@ploidy, ncol = pop1@nLoci,byrow = FALSE)
+colnames(par_H) <- paste("L", 1:pop1@nLoci, sep = ".")
+par_H
+```
+
+## Haplotypes of the offspring generation
+We now make a corresponding matrix of offspring haplotypes applying the exact same code to **pop2**. The first four offspring haplotypes are shown.
+
+```{r rc_haplos2}
+off_H <- pullSegSiteHaplo(pop = pop2, haplo = "all", chr = 1, simParam = SP)
+off_H <- matrix(off_H, nrow = pop2@nInd * pop2@ploidy, ncol = pop2@nLoci, byrow = FALSE)
+colnames(off_H) <- paste("L", 1:pop2@nLoci, sep = ".")
+head(off_H, 4)
+```
+
+Although we continue using the matrices in subsequent operations, now is a good time to set up a few qualifiers so we don't lose track of which each row of loci corresponds to which individual and haplotype. Given that it will form the basis for our analysis of recombination, we will do this just for the matrix of offspring haplotypes. As for our other scripts, we make our qualifiers dynamic by using **Pop-Class** objects. We start by assigning an ascending haplotype ID corresponding to the numbered rows of the offspring haplotype matrix. Offspring and allele IDs are similarly assigned. The qualifiers are compiled into a data.frame. Although we could easily bind the offspring matrix to the qualifiers, a few calculations will first be performed. 
+
+```{r rc_haplos3}
+HAP <- 1:(pop2@nInd * pop2@ploidy)
+ID <- rep(1:pop2@nInd, each = pop2@ploidy)
+ALE <-rep(1:pop2@ploidy, pop2@nInd)
+OFF_Q <- data.frame(HAP, ID, ALE)
+head(OFF_Q, 4)
+```
+
+## Assigning parental haplotypes to offspring haplotypes
+In assessing recombination we are going to match each offspring haplotype with the parental haplotype it resembles most. We will then compare the parent / offspring haplotypes pairs to determine at which loci recombination has taken place. To do all of this matching and comparing we will use **for loops**. In R programming, **for loops** are generally avoided and replaced with **apply** functions. Here, a **for loop** is shown because it is easier to 'talk through'. To see **for loop** alternatives, look at the **recomb_report** function code in the Appendix.
+
+The first **for loop** is going to compare offspring haplotypes with parental haplotypes. 
+
+We first need to set up a **data.frame** to accept the data generate by the **for loop**. 
+```{r rc_parent_select}
+par_SEL <- as.data.frame(matrix(0, nrow = pop2@nInd * pop2@ploidy, ncol = pop1@nInd * pop1@ploidy))
+colnames(par_SEL) <- 1:(pop1@nInd * pop1@ploidy)
+
+
+for(i in 1:(founderPop@nInd * founderPop@ploidy)){
+  par_SEL[,i] <- rowSums((off_H - matrix(rep(par_H[i,], 
+                                    pop2@nInd * pop2@ploidy),
+                                nrow = pop2@nInd * pop2@ploidy,
+                                ncol = pop2@nLoci,
+                                byrow = TRUE))^2) 
+}
+```
+

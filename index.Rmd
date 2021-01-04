@@ -1,9 +1,17 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAME HERE"
+title: "Introductory genetics through tilapia breeding simulations"
+author: "PURA acuicultura"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
-# Down the rabbit-hole
+# Introduction
 
+AlphaSimR is a powerful platform for carrying out breeding simulations. Rather than working in phenotypic measures,  simulations in AlphaSimR are carried out at the level of genome. Any level of genomic architecture can be simulated. Chromosome number and length, segregation site and loci number, ploidy level, etc. are all programmable. In fact, the simulator is much more limited by our understanding of fish genomes than by its capabilities. In this chapter we will learn about AlphaSimR by doing. In understanding how AlphaSimR works it will be impossible to avoid a number of fundamental themes relating to genetics, including quantitative, population, and molecular. We will provide some necessary background, but no where near what is available in standard texts on the subjects. As such, look for recommended references for a deeper understanding. Specific goals of the chapter include:
+
+1. Take a closer look at AlphaSimR and how it is used for breeding simulation
+2. Follow a small population through one generation to understand recombination
+3. Examine important measures of population genetics across multiple generations
+4. Develop an additive trait and examine the quantitative trait loci underlying the trait
+5. Learn how to create simple physical maps of the genome
+6. Develop 'tilapia-like' genomes and populations for breeding simulations
