@@ -1,9 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
-
 - [ ] 2. Render locally with `bookdown::render_book("index.Rmd")`.
 
 - [ ] 3. Use `browseURL("docs/index.html")` to view your book locally (or just open `index.html` in a browser).

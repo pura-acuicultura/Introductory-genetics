@@ -1,5 +1,5 @@
 introduction
-alphasimr
+a-brief-introduction-to-alphasimr
 introduction-1
 creating-founder-haplotypes
 setting-simulation-parameters

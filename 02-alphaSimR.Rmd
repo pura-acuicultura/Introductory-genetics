@@ -5,7 +5,7 @@ date: "8/7/2020"
 output: html_document
 ---
 
-# AlphaSimR
+# A brief introduction to AlphaSimR
 
 ```{r as_setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -19,19 +19,18 @@ library(tidyverse)
 ```
 
 ## Creating founder haplotypes
-
-The first step in developing a population for simulation is the definition of founder haplotypes. In creating founder haplotypes, the genomic architecture of the to be simulated organism is defined. In AlphaSimR, haplotypes are binary strings of 0's and 1's. Strings are arranged in a pre-defined number of chromosomes and to a pre-defined length in units of segregation sites. Given that the custom design of haplotypes can be a bit overwhelming to first time users, the function  **quickHaplo** can initially be used to get started. **quickHaplo** allows the user to easily define the number of individuals, number of chromosomes per individual, number of segregation sites per chromosome, ploidy level, and the genetic length of chromosomes in units of Morgans. An option for creating inbred founders is also possible.  
+In creating a population for simulation you need to first develop the founder haplotypes. In creating the founder haplotypes, the genomic architecture of the simulated organism is defined. In AlphaSimR, haplotypes are binary strings of 0's and 1's. Strings are arranged in pre-defined chromosome numbers and lengths in units of segregation sites. Given that the custom development of haplotypes can be a bit overwhelming to first time users, the function  `quickHaplo()` can initially be used to get started. `quickHaplo()` makes it easy to define the number of individuals, number of chromosomes per individual, number of segregation sites per chromosome, ploidy level, and the genetic length of chromosomes in units of Morgans. An option for creating inbred founders is also available for more advanced users. The code to create haplotypes for 10 individuals having extremely simple single chromosome diploid genomes is shown below.  
 
 ```{r as_haplotypes, echo = TRUE}
-pop_haplos <- quickHaplo(nInd = 10,      # number of individuals
-                         nChr = 1,       # number of chromosomes
-                         segSites = 10,  # number of segregation sites
-                         genLen = 1,     # genetic length in Morgans
-                         ploidy = 2L,    # ploidy level of organism
+pop_haplos <- quickHaplo(nInd = 10, # number of individuals
+                         nChr = 1, # number of chromosomes
+                         segSites = 10, # number of segregation sites
+                         genLen = 1, # genetic length in Morgans
+                         ploidy = 2L, # ploidy level of organism
                          inbred = FALSE) # are founders inbred?
 ```
 
-**quickHaplo** saves haplotype information as a **MapPop** class object. Each slot can be accessed using @ symbol, with list slots requiring additional designations in **[]**. The **MapPop** file provides a record of important genome characteristics. Knowing how to access these characteristics is important to secondary analyses of breeding simulations.  
+`quickHaplo()` saves haplotypes as a `MapPop` class object. Each slot can be accessed using an `@` symbol. Of course, slots in the form of lists require additional designations within `[]`. The `MapPop` object provides a record of important genome characteristics. Knowing how to access these characteristics is important to the analysis of breeding simulations. The following information can be obtained and/or modified through the `MapPop` object. 
 
 ```{r as_haplotype calls, echo = TRUE, results = 'hide', message = FALSE, warning = FALSE}
 pop_haplos@genMap[1] # a vector of segregation sites locations (M) per [chromosome]
@@ -43,7 +42,18 @@ pop_haplos@nLoci[1] # a vector of loci number per [chromosome]
 pop_haplos@geno[1] # matrices of haplotypes per [individual]
 ```
 
-Definition of haplotypes is covered in greater detail throughout chapter 1. Chromosome number, segregation sites, haplotypes maps, and centromeres are central to physical genome mapping. Genetic length is covered in a thorough investigation of recombination in AlphaSimR.
+As suggested through the name, `MapPop` class objects contain information about the physical map, or genomic architecture, of the simulated organisms. Chromosome number, segregation site location, ploidy, loci number, and centromere location are all central to the physical mapping of a genome. We will discuss all of these items in greater detail in *Chapter 5, Physical mapping of simulated genomes*. Here, it is important to note that genome length in AlphaSimR is not defined in base pairs, but rather Morgans. Being a measure of genetic linkage, chromosome length interacts directly with `MapPop` information in 'guiding' the formation of gametes (NB: meiosis) in the simulated organism. Being of great importance to breeding simulations, genetic length is discussed in more detail in *Chapter 3, An overview of recombination*.
+
+When applied to a `MapPop` class object, the function `pullSegSiteHaplo()` returns the simulated haplotypes. The code and first few lines of the output are shown below. 
+
+```{r as_get_haplotypes, echo = TRUE}
+haplos <- pullSegSiteHaplo(pop = pop_haplos, # Pop-class object
+                           haplo = "all", # "all" or use 1 for males and 2 for females
+                           chr = 1) # chromosome number, NULL = all
+head(haplos)
+```
+
+`pullSegSiteHaplo()` returns a *m x n* matrix where each row equates to a haplotype (*m*) and each column to a loci (*n*). Haplotypes are labeled using an "individual ID number" and a "haplotype number", separated by an underscore. Loci are simply labeled in ascending order as "SITE_1", "SITE_2", etc. For each haplotype x loci combination the allele has been randomly defined as either 0 or 1. As the developers of AlphaSimR clearly state in a vignette associated with the package (NB: `vignette("intro", package = "AlphaSimR")`), the `quickHaplo()` approach to haplotype development, "is equivalent to modeling a population in linkage and Hardy-Weinberg equilibrium with allele frequencies of 0.5. This approach is very rapid but does not generate realistic haplotypes. This makes the approach great for prototyping code, but ill-suited for some types of simulations". We use `quickHaplo()` throughout the introductory genetic lessons but will discuss the alternatives such as `runMacs` and `newMapPop` in *Chapter 7, Simulating a tilapia genome*.  
 
 ## Setting simulation parameters
 
@@ -53,7 +63,7 @@ After defining the founder population haplotypes, simulation parameters are set.
 SP = SimParam$new(pop_haplos) # create a variable for storing new simulation parameters
 ```
 
-## Adding traits to a breeding simulation
+### Adding traits to a breeding simulation
 When paired in diploid individuals, the binary haplotypes become genotypes. At a given locus an individual can be 00, 01, or 11. While it is possible to simply simulate and evaluate genotypic changes in AlphaSimR, most breeding simulations aim to also explore phenotypic change. The first step in simulating phenotypic change is define linkages between the genotypes of specific loci and traits of interest for simulation. Traits of any complexity can be added.
 
 ```{r as_additive traits, echo = TRUE, results = 'hide', message = FALSE, warning = FALSE}

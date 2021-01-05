@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 AlphaSimR | Introductory genetics through tilapia breeding simulations</title>
-  <meta name="description" content="Chapter 2 AlphaSimR | Introductory genetics through tilapia breeding simulations" />
+  <title>Chapter 2 A brief introduction to AlphaSimR | Introductory genetics through tilapia breeding simulations</title>
+  <meta name="description" content="Chapter 2 A brief introduction to AlphaSimR | Introductory genetics through tilapia breeding simulations" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 AlphaSimR | Introductory genetics through tilapia breeding simulations" />
+  <meta property="og:title" content="Chapter 2 A brief introduction to AlphaSimR | Introductory genetics through tilapia breeding simulations" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 AlphaSimR | Introductory genetics through tilapia breeding simulations" />
+  <meta name="twitter:title" content="Chapter 2 A brief introduction to AlphaSimR | Introductory genetics through tilapia breeding simulations" />
   
   
   
@@ -135,11 +135,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="alphasimr.html"><a href="alphasimr.html"><i class="fa fa-check"></i><b>2</b> AlphaSimR</a><ul>
-<li class="chapter" data-level="2.1" data-path="alphasimr.html"><a href="alphasimr.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
-<li class="chapter" data-level="2.2" data-path="alphasimr.html"><a href="alphasimr.html#creating-founder-haplotypes"><i class="fa fa-check"></i><b>2.2</b> Creating founder haplotypes</a></li>
-<li class="chapter" data-level="2.3" data-path="alphasimr.html"><a href="alphasimr.html#setting-simulation-parameters"><i class="fa fa-check"></i><b>2.3</b> Setting simulation parameters</a></li>
-<li class="chapter" data-level="2.4" data-path="alphasimr.html"><a href="alphasimr.html#adding-traits-to-a-breeding-simulation"><i class="fa fa-check"></i><b>2.4</b> Adding traits to a breeding simulation</a></li>
+<li class="chapter" data-level="2" data-path="a-brief-introduction-to-alphasimr.html"><a href="a-brief-introduction-to-alphasimr.html"><i class="fa fa-check"></i><b>2</b> A brief introduction to AlphaSimR</a><ul>
+<li class="chapter" data-level="2.1" data-path="a-brief-introduction-to-alphasimr.html"><a href="a-brief-introduction-to-alphasimr.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="a-brief-introduction-to-alphasimr.html"><a href="a-brief-introduction-to-alphasimr.html#creating-founder-haplotypes"><i class="fa fa-check"></i><b>2.2</b> Creating founder haplotypes</a></li>
+<li class="chapter" data-level="2.3" data-path="a-brief-introduction-to-alphasimr.html"><a href="a-brief-introduction-to-alphasimr.html#setting-simulation-parameters"><i class="fa fa-check"></i><b>2.3</b> Setting simulation parameters</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="a-brief-introduction-to-alphasimr.html"><a href="a-brief-introduction-to-alphasimr.html#adding-traits-to-a-breeding-simulation"><i class="fa fa-check"></i><b>2.3.1</b> Adding traits to a breeding simulation</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="recombination.html"><a href="recombination.html"><i class="fa fa-check"></i><b>3</b> Recombination</a><ul>
 <li class="chapter" data-level="3.1" data-path="recombination.html"><a href="recombination.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
@@ -189,48 +190,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="alphasimr" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> AlphaSimR</h1>
+<div id="a-brief-introduction-to-alphasimr" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> A brief introduction to AlphaSimR</h1>
 <div id="introduction-1" class="section level2">
 <h2><span class="header-section-number">2.1</span> Introduction</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="alphasimr.html#cb1-1"></a><span class="kw">library</span>(AlphaSimR)</span>
-<span id="cb1-2"><a href="alphasimr.html#cb1-2"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="a-brief-introduction-to-alphasimr.html#cb1-1"></a><span class="kw">library</span>(AlphaSimR)</span>
+<span id="cb1-2"><a href="a-brief-introduction-to-alphasimr.html#cb1-2"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 </div>
 <div id="creating-founder-haplotypes" class="section level2">
 <h2><span class="header-section-number">2.2</span> Creating founder haplotypes</h2>
-<p>In creating a population for simulation you need to first develop the founder haplotypes. In creating the founder haplotypes, the genomic architecture of the simulated organism is defined. In AlphaSimR, haplotypes are binary strings of 0’s and 1’s. Strings are arranged in a pre-defined number of chromosomes and to a pre-defined length in units of segregation sites. Given that the custom design of haplotypes can be a bit overwhelming to first time users, the function <code>quickHaplo</code> can initially be used to get started. <strong>quickHaplo</strong> allows the user to easily define the number of individuals, number of chromosomes per individual, number of segregation sites per chromosome, ploidy level, and the genetic length of chromosomes in units of Morgans. An option for creating inbred founders is also possible.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="alphasimr.html#cb2-1"></a>pop_haplos &lt;-<span class="st"> </span><span class="kw">quickHaplo</span>(<span class="dt">nInd =</span> <span class="dv">10</span>,      <span class="co"># number of individuals</span></span>
-<span id="cb2-2"><a href="alphasimr.html#cb2-2"></a>                         <span class="dt">nChr =</span> <span class="dv">1</span>,       <span class="co"># number of chromosomes</span></span>
-<span id="cb2-3"><a href="alphasimr.html#cb2-3"></a>                         <span class="dt">segSites =</span> <span class="dv">10</span>,  <span class="co"># number of segregation sites</span></span>
-<span id="cb2-4"><a href="alphasimr.html#cb2-4"></a>                         <span class="dt">genLen =</span> <span class="dv">1</span>,     <span class="co"># genetic length in Morgans</span></span>
-<span id="cb2-5"><a href="alphasimr.html#cb2-5"></a>                         <span class="dt">ploidy =</span> 2L,    <span class="co"># ploidy level of organism</span></span>
-<span id="cb2-6"><a href="alphasimr.html#cb2-6"></a>                         <span class="dt">inbred =</span> <span class="ot">FALSE</span>) <span class="co"># are founders inbred?</span></span></code></pre></div>
-<p><strong>quickHaplo</strong> saves haplotype information as a <strong>MapPop</strong> class object. Each slot can be accessed using @ symbol, with list slots requiring additional designations in <strong>[]</strong>. The <strong>MapPop</strong> file provides a record of important genome characteristics. Knowing how to access these characteristics is important to secondary analyses of breeding simulations.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="alphasimr.html#cb3-1"></a>pop_haplos<span class="op">@</span>genMap[<span class="dv">1</span>] <span class="co"># a vector of segregation sites locations (M) per [chromosome]</span></span>
-<span id="cb3-2"><a href="alphasimr.html#cb3-2"></a>pop_haplos<span class="op">@</span>centromere[<span class="dv">1</span>] <span class="co"># a vector of centromere location (M) per [chromosome]</span></span>
-<span id="cb3-3"><a href="alphasimr.html#cb3-3"></a>pop_haplos<span class="op">@</span>nInd <span class="co"># the number of individuals</span></span>
-<span id="cb3-4"><a href="alphasimr.html#cb3-4"></a>pop_haplos<span class="op">@</span>nChr <span class="co"># the number of chromosomes</span></span>
-<span id="cb3-5"><a href="alphasimr.html#cb3-5"></a>pop_haplos<span class="op">@</span>ploidy <span class="co"># the ploidy of individuals</span></span>
-<span id="cb3-6"><a href="alphasimr.html#cb3-6"></a>pop_haplos<span class="op">@</span>nLoci[<span class="dv">1</span>] <span class="co"># a vector of loci number per [chromosome]</span></span>
-<span id="cb3-7"><a href="alphasimr.html#cb3-7"></a>pop_haplos<span class="op">@</span>geno[<span class="dv">1</span>] <span class="co"># matrices of haplotypes per [individual]</span></span></code></pre></div>
-<p>Definition of haplotypes is covered in greater detail throughout chapter 1. Chromosome number, segregation sites, haplotypes maps, and centromeres are central to physical genome mapping. Genetic length is covered in a thorough investigation of recombination in AlphaSimR.</p>
+<p>In creating a population for simulation you need to first develop the founder haplotypes. In creating the founder haplotypes, the genomic architecture of the simulated organism is defined. In AlphaSimR, haplotypes are binary strings of 0’s and 1’s. Strings are arranged in pre-defined chromosome numbers and lengths in units of segregation sites. Given that the custom development of haplotypes can be a bit overwhelming to first time users, the function <code>quickHaplo()</code> can initially be used to get started. <code>quickHaplo()</code> makes it easy to define the number of individuals, number of chromosomes per individual, number of segregation sites per chromosome, ploidy level, and the genetic length of chromosomes in units of Morgans. An option for creating inbred founders is also available for more advanced users. The code to create haplotypes for 10 individuals having extremely simple single chromosome diploid genomes is shown below.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="a-brief-introduction-to-alphasimr.html#cb2-1"></a>pop_haplos &lt;-<span class="st"> </span><span class="kw">quickHaplo</span>(<span class="dt">nInd =</span> <span class="dv">10</span>, <span class="co"># number of individuals</span></span>
+<span id="cb2-2"><a href="a-brief-introduction-to-alphasimr.html#cb2-2"></a>                         <span class="dt">nChr =</span> <span class="dv">1</span>, <span class="co"># number of chromosomes</span></span>
+<span id="cb2-3"><a href="a-brief-introduction-to-alphasimr.html#cb2-3"></a>                         <span class="dt">segSites =</span> <span class="dv">10</span>, <span class="co"># number of segregation sites</span></span>
+<span id="cb2-4"><a href="a-brief-introduction-to-alphasimr.html#cb2-4"></a>                         <span class="dt">genLen =</span> <span class="dv">1</span>, <span class="co"># genetic length in Morgans</span></span>
+<span id="cb2-5"><a href="a-brief-introduction-to-alphasimr.html#cb2-5"></a>                         <span class="dt">ploidy =</span> 2L, <span class="co"># ploidy level of organism</span></span>
+<span id="cb2-6"><a href="a-brief-introduction-to-alphasimr.html#cb2-6"></a>                         <span class="dt">inbred =</span> <span class="ot">FALSE</span>) <span class="co"># are founders inbred?</span></span></code></pre></div>
+<p><code>quickHaplo()</code> saves haplotypes as a <code>MapPop</code> class object. Each slot can be accessed using an <code>@</code> symbol. Of course, slots in the form of lists require additional designations within <code>[]</code>. The <code>MapPop</code> object provides a record of important genome characteristics. Knowing how to access these characteristics is important to the analysis of breeding simulations. The following information can be obtained and/or modified through the <code>MapPop</code> object.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="a-brief-introduction-to-alphasimr.html#cb3-1"></a>pop_haplos<span class="op">@</span>genMap[<span class="dv">1</span>] <span class="co"># a vector of segregation sites locations (M) per [chromosome]</span></span>
+<span id="cb3-2"><a href="a-brief-introduction-to-alphasimr.html#cb3-2"></a>pop_haplos<span class="op">@</span>centromere[<span class="dv">1</span>] <span class="co"># a vector of centromere location (M) per [chromosome]</span></span>
+<span id="cb3-3"><a href="a-brief-introduction-to-alphasimr.html#cb3-3"></a>pop_haplos<span class="op">@</span>nInd <span class="co"># the number of individuals</span></span>
+<span id="cb3-4"><a href="a-brief-introduction-to-alphasimr.html#cb3-4"></a>pop_haplos<span class="op">@</span>nChr <span class="co"># the number of chromosomes</span></span>
+<span id="cb3-5"><a href="a-brief-introduction-to-alphasimr.html#cb3-5"></a>pop_haplos<span class="op">@</span>ploidy <span class="co"># the ploidy of individuals</span></span>
+<span id="cb3-6"><a href="a-brief-introduction-to-alphasimr.html#cb3-6"></a>pop_haplos<span class="op">@</span>nLoci[<span class="dv">1</span>] <span class="co"># a vector of loci number per [chromosome]</span></span>
+<span id="cb3-7"><a href="a-brief-introduction-to-alphasimr.html#cb3-7"></a>pop_haplos<span class="op">@</span>geno[<span class="dv">1</span>] <span class="co"># matrices of haplotypes per [individual]</span></span></code></pre></div>
+<p>As suggested through the name, <code>MapPop</code> class objects contain information about the physical map, or genomic architecture, of the simulated organisms. Chromosome number, segregation site location, ploidy, loci number, and centromere location are all central to the physical mapping of a genome. We will discuss all of these items in greater detail in <em>Chapter 5, Physical mapping of simulated genomes</em>. Here, it is important to note that genome length in AlphaSimR is not defined in base pairs, but rather Morgans. Being a measure of genetic linkage, chromosome length interacts directly with <code>MapPop</code> information in ‘guiding’ the formation of gametes (NB: meiosis) in the simulated organism. Being of great importance to breeding simulations, genetic length is discussed in more detail in <em>Chapter 3, An overview of recombination</em>.</p>
+<p>When applied to a <code>MapPop</code> class object, the function <code>pullSegSiteHaplo()</code> returns the simulated haplotypes. The code and first few lines of the output are shown below.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="a-brief-introduction-to-alphasimr.html#cb4-1"></a>haplos &lt;-<span class="st"> </span><span class="kw">pullSegSiteHaplo</span>(<span class="dt">pop =</span> pop_haplos, <span class="co"># Pop-class object</span></span>
+<span id="cb4-2"><a href="a-brief-introduction-to-alphasimr.html#cb4-2"></a>                           <span class="dt">haplo =</span> <span class="st">&quot;all&quot;</span>, <span class="co"># &quot;all&quot; or use 1 for males and 2 for females</span></span>
+<span id="cb4-3"><a href="a-brief-introduction-to-alphasimr.html#cb4-3"></a>                           <span class="dt">chr =</span> <span class="dv">1</span>) <span class="co"># chromosome number, NULL = all</span></span>
+<span id="cb4-4"><a href="a-brief-introduction-to-alphasimr.html#cb4-4"></a><span class="kw">head</span>(haplos)</span></code></pre></div>
+<pre><code>##     SITE_1 SITE_2 SITE_3 SITE_4 SITE_5 SITE_6 SITE_7 SITE_8 SITE_9 SITE_10
+## 1_1      1      1      0      0      1      0      0      0      1       1
+## 1_2      0      0      0      1      0      1      1      1      1       1
+## 2_1      0      1      1      1      1      0      0      1      0       0
+## 2_2      1      0      1      1      0      1      0      1      0       0
+## 3_1      1      1      0      1      0      0      1      0      1       0
+## 3_2      1      1      1      1      1      1      1      1      1       1</code></pre>
+<p><code>pullSegSiteHaplo()</code> returns a <em>m x n</em> matrix where each row equates to a haplotype (<em>m</em>) and each column to a loci (<em>n</em>). Haplotypes are labeled using an “individual ID number” and a “haplotype number”, separated by an underscore. Loci are simply labeled in ascending order as “SITE_1”, “SITE_2”, etc. For each haplotype x loci combination the allele has been randomly defined as either 0 or 1. As the developers of AlphaSimR clearly state in a vignette associated with the package (NB: <code>vignette("intro", package = "AlphaSimR")</code>), the <code>quickHaplo()</code> approach to haplotype development, “is equivalent to modeling a population in linkage and Hardy-Weinberg equilibrium with allele frequencies of 0.5. This approach is very rapid but does not generate realistic haplotypes. This makes the approach great for prototyping code, but ill-suited for some types of simulations”. We use <code>quickHaplo()</code> throughout the introductory genetic lessons but will discuss the alternatives such as <code>runMacs</code> and <code>newMapPop</code> in <em>Chapter 7, Simulating a tilapia genome</em>.</p>
 </div>
 <div id="setting-simulation-parameters" class="section level2">
 <h2><span class="header-section-number">2.3</span> Setting simulation parameters</h2>
 <p>After defining the founder population haplotypes, simulation parameters are set. As their name implies, simulation parameters define the conditions through which a simulation operates. AlphaSimR possesses a myriad of simulation parameters – far more than can be covered here. A review of the most important parameters to the breeding simulations covered throughout the book are illustrated here. The first step in defining simulation parameters is to create a <strong>SimParam</strong> object. After this is done, simulation parameters can be added sequentially.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="alphasimr.html#cb4-1"></a>SP =<span class="st"> </span>SimParam<span class="op">$</span><span class="kw">new</span>(pop_haplos) <span class="co"># create a variable for storing new simulation parameters</span></span></code></pre></div>
-</div>
-<div id="adding-traits-to-a-breeding-simulation" class="section level2">
-<h2><span class="header-section-number">2.4</span> Adding traits to a breeding simulation</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="a-brief-introduction-to-alphasimr.html#cb6-1"></a>SP =<span class="st"> </span>SimParam<span class="op">$</span><span class="kw">new</span>(pop_haplos) <span class="co"># create a variable for storing new simulation parameters</span></span></code></pre></div>
+<div id="adding-traits-to-a-breeding-simulation" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Adding traits to a breeding simulation</h3>
 <p>When paired in diploid individuals, the binary haplotypes become genotypes. At a given locus an individual can be 00, 01, or 11. While it is possible to simply simulate and evaluate genotypic changes in AlphaSimR, most breeding simulations aim to also explore phenotypic change. The first step in simulating phenotypic change is define linkages between the genotypes of specific loci and traits of interest for simulation. Traits of any complexity can be added.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="alphasimr.html#cb5-1"></a>SP<span class="op">$</span><span class="kw">addTraitA</span>(<span class="dt">nQtlPerChr =</span> <span class="dv">3</span>, <span class="co"># number of QTL for trait</span></span>
-<span id="cb5-2"><a href="alphasimr.html#cb5-2"></a>             <span class="dt">mean =</span> <span class="dv">454</span>, <span class="co"># mean genetic value of the trait</span></span>
-<span id="cb5-3"><a href="alphasimr.html#cb5-3"></a>             <span class="dt">var =</span> <span class="dv">50</span>, <span class="co"># variance of trait in population</span></span>
-<span id="cb5-4"><a href="alphasimr.html#cb5-4"></a>             <span class="dt">corA =</span> <span class="ot">NULL</span>, <span class="co"># matrix of correlations between additive effects</span></span>
-<span id="cb5-5"><a href="alphasimr.html#cb5-5"></a>             <span class="dt">gamma =</span> <span class="ot">FALSE</span>, <span class="co"># to use a gamma distribution in place of a normal distribution</span></span>
-<span id="cb5-6"><a href="alphasimr.html#cb5-6"></a>             <span class="dt">shape =</span> <span class="dv">1</span>, <span class="co"># shape parameter for gamma distribution only</span></span>
-<span id="cb5-7"><a href="alphasimr.html#cb5-7"></a>             <span class="dt">force =</span> <span class="ot">FALSE</span>) <span class="co"># keep false until this is understood!</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="a-brief-introduction-to-alphasimr.html#cb7-1"></a>SP<span class="op">$</span><span class="kw">addTraitA</span>(<span class="dt">nQtlPerChr =</span> <span class="dv">3</span>, <span class="co"># number of QTL for trait</span></span>
+<span id="cb7-2"><a href="a-brief-introduction-to-alphasimr.html#cb7-2"></a>             <span class="dt">mean =</span> <span class="dv">454</span>, <span class="co"># mean genetic value of the trait</span></span>
+<span id="cb7-3"><a href="a-brief-introduction-to-alphasimr.html#cb7-3"></a>             <span class="dt">var =</span> <span class="dv">50</span>, <span class="co"># variance of trait in population</span></span>
+<span id="cb7-4"><a href="a-brief-introduction-to-alphasimr.html#cb7-4"></a>             <span class="dt">corA =</span> <span class="ot">NULL</span>, <span class="co"># matrix of correlations between additive effects</span></span>
+<span id="cb7-5"><a href="a-brief-introduction-to-alphasimr.html#cb7-5"></a>             <span class="dt">gamma =</span> <span class="ot">FALSE</span>, <span class="co"># to use a gamma distribution in place of a normal distribution</span></span>
+<span id="cb7-6"><a href="a-brief-introduction-to-alphasimr.html#cb7-6"></a>             <span class="dt">shape =</span> <span class="dv">1</span>, <span class="co"># shape parameter for gamma distribution only</span></span>
+<span id="cb7-7"><a href="a-brief-introduction-to-alphasimr.html#cb7-7"></a>             <span class="dt">force =</span> <span class="ot">FALSE</span>) <span class="co"># keep false until this is understood!</span></span></code></pre></div>
 
+</div>
 </div>
 </div>
             </section>

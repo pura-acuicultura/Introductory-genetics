@@ -5,13 +5,13 @@ library(tidyverse)
 library(Matrix)
 library(ape)
 
-vignette("intro", package = "AlphaSimR")
+# vignette("intro", package = "AlphaSimR")
 
 # 1. CREATE FOUNDER HAPLOTYPES #####
 #__ 1.1 Founder haplotypes with quickHaplo #####
 pop_haplos <- quickHaplo(nInd = 10, # number of individuals
                          nChr = 1, # number of chromosomes
-                         segSites = 100, # number of segregation sites
+                         segSites = 10, # number of segregation sites
                          genLen = 1, # genetic length of chromosomes
                          ploidy = 2L, # ploidy level of organism
                          inbred = TRUE) # are founders inbred?
@@ -25,6 +25,14 @@ pop_haplos@nChr # number of chromosomes
 pop_haplos@ploidy # ploidy of individuals
 pop_haplos@nLoci[1] # returns vector of loci per chromosome
 pop_haplos@geno[1] # what is returned here, a matrix for each individual
+
+# matrix of haplotypes, loci x individual (0/1 on each diploid chromosome)
+haplos <- pullSegSiteHaplo(pop = pop_haplos, # Pop-class object
+                           haplo = "all", # "all" or use 1 for males and 2 for females
+                           chr = 1) # chromosome number, NULL = all
+class(haplos)
+str(haplos)
+haplos
 
 # 2. SET SIMULATION PARAMETERS #####
 

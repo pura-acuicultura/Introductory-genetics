@@ -24,14 +24,14 @@
 <meta name="author" content="PURA acuicultura" />
 
 
-<meta name="date" content="2021-01-04" />
+<meta name="date" content="2021-01-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="alphasimr.html"/>
+<link rel="prev" href="a-brief-introduction-to-alphasimr.html"/>
 <link rel="next" href="populations.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +51,6 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -137,11 +135,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="alphasimr.html"><a href="alphasimr.html"><i class="fa fa-check"></i><b>2</b> AlphaSimR</a><ul>
-<li class="chapter" data-level="2.1" data-path="alphasimr.html"><a href="alphasimr.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
-<li class="chapter" data-level="2.2" data-path="alphasimr.html"><a href="alphasimr.html#creating-founder-haplotypes"><i class="fa fa-check"></i><b>2.2</b> Creating founder haplotypes</a></li>
-<li class="chapter" data-level="2.3" data-path="alphasimr.html"><a href="alphasimr.html#setting-simulation-parameters"><i class="fa fa-check"></i><b>2.3</b> Setting simulation parameters</a></li>
-<li class="chapter" data-level="2.4" data-path="alphasimr.html"><a href="alphasimr.html#adding-traits-to-a-breeding-simulation"><i class="fa fa-check"></i><b>2.4</b> Adding traits to a breeding simulation</a></li>
+<li class="chapter" data-level="2" data-path="a-brief-introduction-to-alphasimr.html"><a href="a-brief-introduction-to-alphasimr.html"><i class="fa fa-check"></i><b>2</b> A brief introduction to AlphaSimR</a><ul>
+<li class="chapter" data-level="2.1" data-path="a-brief-introduction-to-alphasimr.html"><a href="a-brief-introduction-to-alphasimr.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="a-brief-introduction-to-alphasimr.html"><a href="a-brief-introduction-to-alphasimr.html#creating-founder-haplotypes"><i class="fa fa-check"></i><b>2.2</b> Creating founder haplotypes</a></li>
+<li class="chapter" data-level="2.3" data-path="a-brief-introduction-to-alphasimr.html"><a href="a-brief-introduction-to-alphasimr.html#setting-simulation-parameters"><i class="fa fa-check"></i><b>2.3</b> Setting simulation parameters</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="a-brief-introduction-to-alphasimr.html"><a href="a-brief-introduction-to-alphasimr.html#adding-traits-to-a-breeding-simulation"><i class="fa fa-check"></i><b>2.3.1</b> Adding traits to a breeding simulation</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="recombination.html"><a href="recombination.html"><i class="fa fa-check"></i><b>3</b> Recombination</a><ul>
 <li class="chapter" data-level="3.1" data-path="recombination.html"><a href="recombination.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
@@ -196,67 +195,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="introduction-2" class="section level2">
 <h2><span class="header-section-number">3.1</span> Introduction</h2>
 <p>In exploring recombination, <strong>AlphaSimR</strong> is used to create parents and make full sib families. In the assessment of recombination a few other libraries are used: <strong>Matrix</strong>, <strong>tidyverse</strong>, and <strong>gridExtra</strong>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="recombination.html#cb6-1"></a><span class="kw">library</span>(AlphaSimR)</span>
-<span id="cb6-2"><a href="recombination.html#cb6-2"></a><span class="kw">library</span>(Matrix)</span>
-<span id="cb6-3"><a href="recombination.html#cb6-3"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb6-4"><a href="recombination.html#cb6-4"></a><span class="kw">library</span>(gridExtra)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="recombination.html#cb8-1"></a><span class="kw">library</span>(AlphaSimR)</span>
+<span id="cb8-2"><a href="recombination.html#cb8-2"></a><span class="kw">library</span>(Matrix)</span>
+<span id="cb8-3"><a href="recombination.html#cb8-3"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb8-4"><a href="recombination.html#cb8-4"></a><span class="kw">library</span>(gridExtra)</span></code></pre></div>
 </div>
 <div id="create-parent-generation" class="section level2">
 <h2><span class="header-section-number">3.2</span> Create parent generation</h2>
 <p>To understand how recombination works in <strong>AlphaSimR</strong> we start with a simple model that can be built upon later. We start by using the <strong>quickHaplo</strong> command to create two parent fish, each diploid with a single chromosome having 10 segregation sites. The length of the chromosome in Morgans is a key determinant of recombination. We will start with a value of 1 cM and then explore how chromosome length impacts recombination.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="recombination.html#cb7-1"></a>founderPop &lt;-<span class="st"> </span><span class="kw">quickHaplo</span>(<span class="dt">nInd =</span> <span class="dv">2</span>, <span class="dt">nChr =</span> <span class="dv">1</span>, <span class="dt">segSites =</span> <span class="dv">10</span>, <span class="dt">genLen =</span> <span class="dv">1</span>, <span class="dt">ploidy =</span> 2L, <span class="dt">inbred =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb7-2"><a href="recombination.html#cb7-2"></a>SP &lt;-<span class="st"> </span>SimParam<span class="op">$</span><span class="kw">new</span>(founderPop)</span>
-<span id="cb7-3"><a href="recombination.html#cb7-3"></a>pop1 &lt;-<span class="st"> </span><span class="kw">newPop</span>(founderPop, <span class="dt">simParam =</span> SP)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="recombination.html#cb9-1"></a>founderPop &lt;-<span class="st"> </span><span class="kw">quickHaplo</span>(<span class="dt">nInd =</span> <span class="dv">2</span>, <span class="dt">nChr =</span> <span class="dv">1</span>, <span class="dt">segSites =</span> <span class="dv">10</span>, <span class="dt">genLen =</span> <span class="dv">1</span>, <span class="dt">ploidy =</span> 2L, <span class="dt">inbred =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb9-2"><a href="recombination.html#cb9-2"></a>SP &lt;-<span class="st"> </span>SimParam<span class="op">$</span><span class="kw">new</span>(founderPop)</span>
+<span id="cb9-3"><a href="recombination.html#cb9-3"></a>pop1 &lt;-<span class="st"> </span><span class="kw">newPop</span>(founderPop, <span class="dt">simParam =</span> SP)</span></code></pre></div>
 </div>
 <div id="make-a-full-sib-family" class="section level2">
 <h2><span class="header-section-number">3.3</span> Make a full-sib family</h2>
 <p>Meiotic recombination in parent fish can be observed in the haplotypes of their offspring. We use the <strong>makeCross</strong> command to simulate the cross. The command requires a cross plan in the form of a two column matrix. The rows of the matrix correspond to the cross and the columns indicate the parents. We make only a single cross of parents 1 and 2. Consequently, our cross plan matrix is straightforward.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="recombination.html#cb8-1"></a>crossPlan &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)</span>
-<span id="cb8-2"><a href="recombination.html#cb8-2"></a>crossPlan</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="recombination.html#cb10-1"></a>crossPlan &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb10-2"><a href="recombination.html#cb10-2"></a>crossPlan</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    2</code></pre>
 <p>Aside from the cross plan, we only need to specify the number of progeny to create. High fecundity in fish is statistically convenient with regards to progeny analysis. We start with a relatively modest 10 progeny but can increase the progeny number to 100 or more later.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="recombination.html#cb10-1"></a>pop2 &lt;-<span class="st"> </span><span class="kw">makeCross</span>(<span class="dt">pop =</span> pop1, <span class="dt">crossPlan =</span> crossPlan, <span class="dt">nProgeny =</span> <span class="dv">10</span>, <span class="dt">simParam =</span> SP)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="recombination.html#cb12-1"></a>pop2 &lt;-<span class="st"> </span><span class="kw">makeCross</span>(<span class="dt">pop =</span> pop1, <span class="dt">crossPlan =</span> crossPlan, <span class="dt">nProgeny =</span> <span class="dv">10</span>, <span class="dt">simParam =</span> SP)</span></code></pre></div>
 </div>
 <div id="haplotypes-of-the-parent-generation" class="section level2">
 <h2><span class="header-section-number">3.4</span> Haplotypes of the parent generation</h2>
 <p>In performing a simulation we have access to information that would be difficult or near impossible to achieve in the real world. Phased haplotypes are one such piece of information, that is also important in the analysis of recombination. We discuss how phased haplotypes can be predicted from actual SNP data in a later chapter. Since our goal here is to understand recombination in <strong>AlphaSimR</strong>, we simply pull them from the simulation.</p>
 <p>We start with the parent haplotypes. We pull the haplotypes using the <strong>pullSegSiteHaplo</strong> command. A matrix of binary haplotypes is returned by parent (m = 4) and loci (n = 10). More specifically, row 1 corresponds to parent 1 / haplotype 1, row 2 to parent 1 / haplotype 2, row 3 to parent 2 / haplotype 1, and row 4 to parent 2 / haplotype 2. As such, column 1, referred to as ‘SITE_1’, corresponds to the binary allele (0/1) present at loci 1 of the four parents. Subsequent columns correspond to the remaining alleles designated by our <strong>founderPop</strong>. Now you can appreciate why we started with a small example.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="recombination.html#cb11-1"></a>par_H &lt;-<span class="st"> </span><span class="kw">pullSegSiteHaplo</span>(<span class="dt">pop =</span> pop1, <span class="dt">haplo =</span> <span class="st">&quot;all&quot;</span>, <span class="dt">chr =</span> <span class="dv">1</span>, <span class="dt">simParam =</span> SP)</span>
-<span id="cb11-2"><a href="recombination.html#cb11-2"></a>par_H</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="recombination.html#cb13-1"></a>par_H &lt;-<span class="st"> </span><span class="kw">pullSegSiteHaplo</span>(<span class="dt">pop =</span> pop1, <span class="dt">haplo =</span> <span class="st">&quot;all&quot;</span>, <span class="dt">chr =</span> <span class="dv">1</span>, <span class="dt">simParam =</span> SP)</span>
+<span id="cb13-2"><a href="recombination.html#cb13-2"></a>par_H</span></code></pre></div>
 <pre><code>##     SITE_1 SITE_2 SITE_3 SITE_4 SITE_5 SITE_6 SITE_7 SITE_8 SITE_9 SITE_10
-## 1_1      0      1      1      1      0      1      1      0      0       1
-## 1_2      1      0      1      1      1      1      1      0      0       0
-## 2_1      0      1      1      0      1      0      1      0      1       0
-## 2_2      0      1      1      0      0      0      0      1      0       0</code></pre>
+## 1_1      1      0      1      1      0      0      1      0      0       1
+## 1_2      1      1      1      0      0      1      0      0      1       0
+## 2_1      1      0      0      1      1      0      0      0      0       1
+## 2_2      1      0      0      1      0      0      0      1      0       0</code></pre>
 <p>Here we clean up the matrix for some downstream analysis. If we define matrix dimensions and names with <strong>Pop-Class</strong> objects we won’t have to rewrite the code every time we increase the number of parents or segregation sites. The number of rows, or number of parental haplotypes, can be expressed as the number of parents (<strong><a href="mailto:pop1@nInd" class="email">pop1@nInd</a></strong>) multiplied by their ploidy (<strong><a href="mailto:pop1@ploidy" class="email">pop1@ploidy</a></strong>) . The number of columns, or number of loci, can be directly called as <strong><a href="mailto:pop1@nLoci" class="email">pop1@nLoci</a></strong>. In naming the loci using <strong>1:<a href="mailto:pop1@nLoci" class="email">pop1@nLoci</a></strong> a dynamic vector accommodating any number of loci is employed.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="recombination.html#cb13-1"></a>par_H &lt;-<span class="st"> </span><span class="kw">matrix</span>(par_H,  <span class="dt">nrow =</span> pop1<span class="op">@</span>nInd <span class="op">*</span><span class="st"> </span>pop1<span class="op">@</span>ploidy, <span class="dt">ncol =</span> pop1<span class="op">@</span>nLoci,<span class="dt">byrow =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb13-2"><a href="recombination.html#cb13-2"></a><span class="kw">colnames</span>(par_H) &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;L&quot;</span>, <span class="dv">1</span><span class="op">:</span>pop1<span class="op">@</span>nLoci, <span class="dt">sep =</span> <span class="st">&quot;.&quot;</span>)</span>
-<span id="cb13-3"><a href="recombination.html#cb13-3"></a>par_H</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="recombination.html#cb15-1"></a>par_H &lt;-<span class="st"> </span><span class="kw">matrix</span>(par_H,  <span class="dt">nrow =</span> pop1<span class="op">@</span>nInd <span class="op">*</span><span class="st"> </span>pop1<span class="op">@</span>ploidy, <span class="dt">ncol =</span> pop1<span class="op">@</span>nLoci,<span class="dt">byrow =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb15-2"><a href="recombination.html#cb15-2"></a><span class="kw">colnames</span>(par_H) &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;L&quot;</span>, <span class="dv">1</span><span class="op">:</span>pop1<span class="op">@</span>nLoci, <span class="dt">sep =</span> <span class="st">&quot;.&quot;</span>)</span>
+<span id="cb15-3"><a href="recombination.html#cb15-3"></a>par_H</span></code></pre></div>
 <pre><code>##      L.1 L.2 L.3 L.4 L.5 L.6 L.7 L.8 L.9 L.10
-## [1,]   0   1   1   1   0   1   1   0   0    1
-## [2,]   1   0   1   1   1   1   1   0   0    0
-## [3,]   0   1   1   0   1   0   1   0   1    0
-## [4,]   0   1   1   0   0   0   0   1   0    0</code></pre>
+## [1,]   1   0   1   1   0   0   1   0   0    1
+## [2,]   1   1   1   0   0   1   0   0   1    0
+## [3,]   1   0   0   1   1   0   0   0   0    1
+## [4,]   1   0   0   1   0   0   0   1   0    0</code></pre>
 </div>
 <div id="haplotypes-of-the-offspring-generation" class="section level2">
 <h2><span class="header-section-number">3.5</span> Haplotypes of the offspring generation</h2>
 <p>We now make a corresponding matrix of offspring haplotypes applying the exact same code to <strong>pop2</strong>. The first four offspring haplotypes are shown.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="recombination.html#cb15-1"></a>off_H &lt;-<span class="st"> </span><span class="kw">pullSegSiteHaplo</span>(<span class="dt">pop =</span> pop2, <span class="dt">haplo =</span> <span class="st">&quot;all&quot;</span>, <span class="dt">chr =</span> <span class="dv">1</span>, <span class="dt">simParam =</span> SP)</span>
-<span id="cb15-2"><a href="recombination.html#cb15-2"></a>off_H &lt;-<span class="st"> </span><span class="kw">matrix</span>(off_H, <span class="dt">nrow =</span> pop2<span class="op">@</span>nInd <span class="op">*</span><span class="st"> </span>pop2<span class="op">@</span>ploidy, <span class="dt">ncol =</span> pop2<span class="op">@</span>nLoci, <span class="dt">byrow =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb15-3"><a href="recombination.html#cb15-3"></a><span class="kw">colnames</span>(off_H) &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;L&quot;</span>, <span class="dv">1</span><span class="op">:</span>pop2<span class="op">@</span>nLoci, <span class="dt">sep =</span> <span class="st">&quot;.&quot;</span>)</span>
-<span id="cb15-4"><a href="recombination.html#cb15-4"></a><span class="kw">head</span>(off_H, <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="recombination.html#cb17-1"></a>off_H &lt;-<span class="st"> </span><span class="kw">pullSegSiteHaplo</span>(<span class="dt">pop =</span> pop2, <span class="dt">haplo =</span> <span class="st">&quot;all&quot;</span>, <span class="dt">chr =</span> <span class="dv">1</span>, <span class="dt">simParam =</span> SP)</span>
+<span id="cb17-2"><a href="recombination.html#cb17-2"></a>off_H &lt;-<span class="st"> </span><span class="kw">matrix</span>(off_H, <span class="dt">nrow =</span> pop2<span class="op">@</span>nInd <span class="op">*</span><span class="st"> </span>pop2<span class="op">@</span>ploidy, <span class="dt">ncol =</span> pop2<span class="op">@</span>nLoci, <span class="dt">byrow =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb17-3"><a href="recombination.html#cb17-3"></a><span class="kw">colnames</span>(off_H) &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;L&quot;</span>, <span class="dv">1</span><span class="op">:</span>pop2<span class="op">@</span>nLoci, <span class="dt">sep =</span> <span class="st">&quot;.&quot;</span>)</span>
+<span id="cb17-4"><a href="recombination.html#cb17-4"></a><span class="kw">head</span>(off_H, <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>##      L.1 L.2 L.3 L.4 L.5 L.6 L.7 L.8 L.9 L.10
-## [1,]   1   0   1   1   1   1   1   0   0    0
-## [2,]   0   1   1   0   1   0   1   0   0    0
-## [3,]   1   0   1   1   1   1   1   0   0    0
-## [4,]   0   1   1   0   0   0   0   1   0    0</code></pre>
+## [1,]   1   1   1   0   0   1   0   0   1    0
+## [2,]   1   0   0   1   0   0   0   0   0    1
+## [3,]   1   1   1   0   0   1   0   0   1    0
+## [4,]   1   0   0   1   0   0   0   0   0    1</code></pre>
 <p>Although we continue using the matrices in subsequent operations, now is a good time to set up a few qualifiers so we don’t lose track of which each row of loci corresponds to which individual and haplotype. Given that it will form the basis for our analysis of recombination, we will do this just for the matrix of offspring haplotypes. As for our other scripts, we make our qualifiers dynamic by using <strong>Pop-Class</strong> objects. We start by assigning an ascending haplotype ID corresponding to the numbered rows of the offspring haplotype matrix. Offspring and allele IDs are similarly assigned. The qualifiers are compiled into a data.frame. Although we could easily bind the offspring matrix to the qualifiers, a few calculations will first be performed.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="recombination.html#cb17-1"></a>HAP &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>(pop2<span class="op">@</span>nInd <span class="op">*</span><span class="st"> </span>pop2<span class="op">@</span>ploidy)</span>
-<span id="cb17-2"><a href="recombination.html#cb17-2"></a>ID &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>pop2<span class="op">@</span>nInd, <span class="dt">each =</span> pop2<span class="op">@</span>ploidy)</span>
-<span id="cb17-3"><a href="recombination.html#cb17-3"></a>ALE &lt;-<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>pop2<span class="op">@</span>ploidy, pop2<span class="op">@</span>nInd)</span>
-<span id="cb17-4"><a href="recombination.html#cb17-4"></a>OFF_Q &lt;-<span class="st"> </span><span class="kw">data.frame</span>(HAP, ID, ALE)</span>
-<span id="cb17-5"><a href="recombination.html#cb17-5"></a><span class="kw">head</span>(OFF_Q, <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="recombination.html#cb19-1"></a>HAP &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>(pop2<span class="op">@</span>nInd <span class="op">*</span><span class="st"> </span>pop2<span class="op">@</span>ploidy)</span>
+<span id="cb19-2"><a href="recombination.html#cb19-2"></a>ID &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>pop2<span class="op">@</span>nInd, <span class="dt">each =</span> pop2<span class="op">@</span>ploidy)</span>
+<span id="cb19-3"><a href="recombination.html#cb19-3"></a>ALE &lt;-<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>pop2<span class="op">@</span>ploidy, pop2<span class="op">@</span>nInd)</span>
+<span id="cb19-4"><a href="recombination.html#cb19-4"></a>OFF_Q &lt;-<span class="st"> </span><span class="kw">data.frame</span>(HAP, ID, ALE)</span>
+<span id="cb19-5"><a href="recombination.html#cb19-5"></a><span class="kw">head</span>(OFF_Q, <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>##   HAP ID ALE
 ## 1   1  1   1
 ## 2   2  1   2
@@ -268,17 +267,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In assessing recombination we are going to match each offspring haplotype with the parental haplotype it resembles most. We will then compare the parent / offspring haplotypes pairs to determine at which loci recombination has taken place. To do all of this matching and comparing we will use <strong>for loops</strong>. In R programming, <strong>for loops</strong> are generally avoided and replaced with <strong>apply</strong> functions. Here, a <strong>for loop</strong> is shown because it is easier to ‘talk through’. To see <strong>for loop</strong> alternatives, look at the <strong>recomb_report</strong> function code in the Appendix.</p>
 <p>The first <strong>for loop</strong> is going to compare offspring haplotypes with parental haplotypes.</p>
 <p>We first need to set up a <strong>data.frame</strong> to accept the data generate by the <strong>for loop</strong>.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="recombination.html#cb19-1"></a>par_SEL &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> pop2<span class="op">@</span>nInd <span class="op">*</span><span class="st"> </span>pop2<span class="op">@</span>ploidy, <span class="dt">ncol =</span> pop1<span class="op">@</span>nInd <span class="op">*</span><span class="st"> </span>pop1<span class="op">@</span>ploidy))</span>
-<span id="cb19-2"><a href="recombination.html#cb19-2"></a><span class="kw">colnames</span>(par_SEL) &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>(pop1<span class="op">@</span>nInd <span class="op">*</span><span class="st"> </span>pop1<span class="op">@</span>ploidy)</span>
-<span id="cb19-3"><a href="recombination.html#cb19-3"></a></span>
-<span id="cb19-4"><a href="recombination.html#cb19-4"></a></span>
-<span id="cb19-5"><a href="recombination.html#cb19-5"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>(founderPop<span class="op">@</span>nInd <span class="op">*</span><span class="st"> </span>founderPop<span class="op">@</span>ploidy)){</span>
-<span id="cb19-6"><a href="recombination.html#cb19-6"></a>  par_SEL[,i] &lt;-<span class="st"> </span><span class="kw">rowSums</span>((off_H <span class="op">-</span><span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(par_H[i,], </span>
-<span id="cb19-7"><a href="recombination.html#cb19-7"></a>                                    pop2<span class="op">@</span>nInd <span class="op">*</span><span class="st"> </span>pop2<span class="op">@</span>ploidy),</span>
-<span id="cb19-8"><a href="recombination.html#cb19-8"></a>                                <span class="dt">nrow =</span> pop2<span class="op">@</span>nInd <span class="op">*</span><span class="st"> </span>pop2<span class="op">@</span>ploidy,</span>
-<span id="cb19-9"><a href="recombination.html#cb19-9"></a>                                <span class="dt">ncol =</span> pop2<span class="op">@</span>nLoci,</span>
-<span id="cb19-10"><a href="recombination.html#cb19-10"></a>                                <span class="dt">byrow =</span> <span class="ot">TRUE</span>))<span class="op">^</span><span class="dv">2</span>) </span>
-<span id="cb19-11"><a href="recombination.html#cb19-11"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="recombination.html#cb21-1"></a>par_SEL &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> pop2<span class="op">@</span>nInd <span class="op">*</span><span class="st"> </span>pop2<span class="op">@</span>ploidy, <span class="dt">ncol =</span> pop1<span class="op">@</span>nInd <span class="op">*</span><span class="st"> </span>pop1<span class="op">@</span>ploidy))</span>
+<span id="cb21-2"><a href="recombination.html#cb21-2"></a><span class="kw">colnames</span>(par_SEL) &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span>(pop1<span class="op">@</span>nInd <span class="op">*</span><span class="st"> </span>pop1<span class="op">@</span>ploidy)</span>
+<span id="cb21-3"><a href="recombination.html#cb21-3"></a></span>
+<span id="cb21-4"><a href="recombination.html#cb21-4"></a></span>
+<span id="cb21-5"><a href="recombination.html#cb21-5"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>(founderPop<span class="op">@</span>nInd <span class="op">*</span><span class="st"> </span>founderPop<span class="op">@</span>ploidy)){</span>
+<span id="cb21-6"><a href="recombination.html#cb21-6"></a>  par_SEL[,i] &lt;-<span class="st"> </span><span class="kw">rowSums</span>((off_H <span class="op">-</span><span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(par_H[i,], </span>
+<span id="cb21-7"><a href="recombination.html#cb21-7"></a>                                    pop2<span class="op">@</span>nInd <span class="op">*</span><span class="st"> </span>pop2<span class="op">@</span>ploidy),</span>
+<span id="cb21-8"><a href="recombination.html#cb21-8"></a>                                <span class="dt">nrow =</span> pop2<span class="op">@</span>nInd <span class="op">*</span><span class="st"> </span>pop2<span class="op">@</span>ploidy,</span>
+<span id="cb21-9"><a href="recombination.html#cb21-9"></a>                                <span class="dt">ncol =</span> pop2<span class="op">@</span>nLoci,</span>
+<span id="cb21-10"><a href="recombination.html#cb21-10"></a>                                <span class="dt">byrow =</span> <span class="ot">TRUE</span>))<span class="op">^</span><span class="dv">2</span>) </span>
+<span id="cb21-11"><a href="recombination.html#cb21-11"></a>}</span></code></pre></div>
 
 </div>
 </div>
@@ -287,7 +286,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="alphasimr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="a-brief-introduction-to-alphasimr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="populations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
